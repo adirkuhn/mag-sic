@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @moot.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @moot.description %>
+</p>
+
+<p>
+  <strong>Voting start at:</strong>
+  <%= @moot.voting_start_at %>
+</p>
+
+<p>
+  <strong>Voting ending at:</strong>
+  <%= @moot.voting_ending_at %>
+</p>
+
+<%= link_to 'Edit', edit_moot_path(@moot) %> |
+<%= link_to 'Back', moots_path %>

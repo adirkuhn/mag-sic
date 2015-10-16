@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  voting_start_at: 2015-10-16 14:18:46
+  voting_ending_at: 2015-10-16 14:18:46
+
+two:
+  title: MyString
+  description: MyText
+  voting_start_at: 2015-10-16 14:18:46
+  voting_ending_at: 2015-10-16 14:18:46

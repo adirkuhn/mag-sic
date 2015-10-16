@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Moots</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Voting start at</th>
+      <th>Voting ending at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @moots.each do |moot| %>
+      <tr>
+        <td><%= moot.title %></td>
+        <td><%= moot.description %></td>
+        <td><%= moot.voting_start_at %></td>
+        <td><%= moot.voting_ending_at %></td>
+        <td><%= link_to 'Show', moot %></td>
+        <td><%= link_to 'Edit', edit_moot_path(moot) %></td>
+        <td><%= link_to 'Destroy', moot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Moot', new_moot_path %>

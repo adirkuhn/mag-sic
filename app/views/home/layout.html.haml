@@ -1,0 +1,17 @@
+!!! 5
+%html
+  %head
+    %title Assine Agora!!!! DJAAA
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+%body
+  %nav.navbar.navbar-default
+    .container
+      .navbar-brand= link_to "Assembleias", root_path
+
+      %ul.nav.navbar-nav.navbar-right
+        %li= link_to "Sign In", new_user_session_path
+
+  .container
+    = yield
