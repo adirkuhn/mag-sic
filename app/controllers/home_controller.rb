@@ -10,8 +10,8 @@ class HomeController < ApplicationController
   end
 
   def buy
-    @plan = Plan.find(params[:id])
+    session[:plan_id] = params[:id]
 
-    render 'devise/registrations/buy'
+    redirect_to new_user_registration_path
   end
 end
