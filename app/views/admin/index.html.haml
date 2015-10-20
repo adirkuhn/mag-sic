@@ -1,0 +1,33 @@
+.container
+  %h1 Hey admin
+
+  .p
+    Hello
+    =current_user.name
+    your last access was at
+    =current_user.last_sign_in_at.strftime("%d/%m/%Y %H:%M:%S")
+
+  %hr
+
+  %h2 Suas assembleias
+
+  =link_to "Nova Assembleia", ""
+
+  %br
+  %br
+
+
+  %div
+    - if @moots.count == 0
+      Você não tem nenhuma assembleia. Por que não
+      = link_to "criar uma agora?", ""
+    - else
+      Lista de moots
+
+  %hr
+  %br
+  %br
+
+  %h2 Usuários
+
+  =link_to "Convidar novo usuário", ""
