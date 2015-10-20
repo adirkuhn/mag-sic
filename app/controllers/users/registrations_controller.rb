@@ -8,7 +8,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if session[:plan_id]
       @plan = Plan.find(session[:plan_id])
-      resource.is_admin = true
       render 'buy'
     else
       respond_with self.resource
@@ -18,6 +17,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
+
+    if session[:plan_id]
+      plan = Plan.find(session[:plan_id])
+      resource.plan = plan
+      resource.is_admin = true
+    end
 
     resource.save
     yield resource if block_given?
@@ -44,7 +49,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       else
         respond_with resource
       end
-
     end
   end
 
