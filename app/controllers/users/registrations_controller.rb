@@ -61,17 +61,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
     yield resource if block_given?
   end
 
-  # POST /resource
+  # # POST /resource
   # def create
   #   super
   # end
 
-  # GET /resource/edit
+  # # GET /resource/edit
   # def edit
-  #   super
+  #   render 'edit'
   # end
 
-  # PUT /resource
+  # # PUT /resource
   # def update
   #   super
   # end
