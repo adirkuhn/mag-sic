@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019231444) do
+ActiveRecord::Schema.define(version: 20151023185237) do
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "site",       limit: 255
+    t.string   "cnpj",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.string   "hash",       limit: 255
+    t.boolean  "active",                 default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
 
   create_table "moots", force: :cascade do |t|
     t.string   "title",            limit: 255
