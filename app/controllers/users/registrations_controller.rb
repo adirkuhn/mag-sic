@@ -18,6 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
+    byebug
 
     if session[:plan_id]
       plan = Plan.find(session[:plan_id])

@@ -32,7 +32,12 @@
         .field
           = company_form.label :site
           %br/
-          = company_form.text_field :name, autofocus: true
+          = company_form.text_field :site, autofocus: true
+
+        .field
+          = company_form.label :cnpj
+          %br/
+          = company_form.text_field :cnpj, autofocus: true
     %hr
 
     .field
