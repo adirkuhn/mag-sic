@@ -20,6 +20,26 @@
       %br/
       = f.text_field :name, autofocus: true
 
+    %hr
+    %div
+      %h3 Company Info
+      = f.fields_for :company do |company_form|
+        .field
+          = company_form.label :name
+          %br/
+          = company_form.text_field :name, autofocus: true
+
+        .field
+          = company_form.label :site
+          %br/
+          = company_form.text_field :site, autofocus: true
+
+        .field
+          = company_form.label :cnpj
+          %br/
+          = company_form.text_field :cnpj, autofocus: true
+    %hr
+
     .field
       = f.label :email
       %br/

@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019231444) do
+ActiveRecord::Schema.define(version: 20151023190457) do
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "site",       limit: 255
+    t.string   "cnpj",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.string   "hash",       limit: 255
+    t.boolean  "active",                 default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
 
   create_table "moots", force: :cascade do |t|
     t.string   "title",            limit: 255
@@ -46,11 +61,14 @@ ActiveRecord::Schema.define(version: 20151019231444) do
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.integer  "plan_id",                limit: 4
+    t.integer  "company_id",             limit: 4
   end
 
+  add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["plan_id"], name: "index_users_on_plan_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "users", "companies"
   add_foreign_key "users", "plans"
 end
