@@ -8,6 +8,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if session[:plan_id]
       @plan = Plan.find(session[:plan_id])
+      self.resource.company = Company.new
       render 'buy'
     else
       respond_with self.resource

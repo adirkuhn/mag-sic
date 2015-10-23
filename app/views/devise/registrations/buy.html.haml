@@ -20,10 +20,6 @@
       %br/
       = f.text_field :name, autofocus: true
 
-<%= f.fields_for :company do |company_form| %>
-      <%= company_form.text_field :cnpj  %>
-      <%= render partial: "devise/shared/field_error", locals: { model: resource.company, field: :cnpj } %>
-    <% end %>
     %div
       = f.fields_for :company do |company_form|
         .field

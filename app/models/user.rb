@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :plan
+  belongs_to :company
 
   accepts_nested_attributes_for :company
 end
