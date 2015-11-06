@@ -1,33 +1,61 @@
 .container
-  %h1 Hey admin
-
-  .p
-    Hello
-    =current_user.name
-    your last access was at
-    =current_user.last_sign_in_at.strftime("%d/%m/%Y %H:%M:%S")
-
-  %hr
-
-  %h2 Suas assembleias
-
-  =link_to "Nova Assembleia", ""
-
-  %br
-  %br
+  .container-fluid
+    .row
+      .col-md-4
+        %img(alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-circle")
+        %h3
+          = current_user.name
+        %p
+          Último acesso
+          = current_user.last_sign_in_at.strftime("%d/%m/%Y %H:%M:%S")
+        %p
+          = link_to "Sair", destroy_user_session_path, method: :delete
 
 
-  %div
-    - if @moots.count == 0
-      Você não tem nenhuma assembleia. Por que não
-      = link_to "criar uma agora?", ""
-    - else
-      Lista de moots
+        %br
+        %br
 
-  %hr
-  %br
-  %br
+        %ul.nav.nav-stacked
+          %li
+            = link_to "Gestão de usuários", "#"
+          %li
+            %a(href="#") Profile
+          %li
+            %a(href="#") Messages
+          
+      .col-md-8
+         
+        %button(type="button" class="btn btn-default") Adicionar Empresa
+  
+  -# %h1 Hey admin
 
-  %h2 Usuários
+  -# .p
+  -#   Hello
+  -#   =current_user.name
+  -#   your last access was at
+  -#   =current_user.last_sign_in_at.strftime("%d/%m/%Y %H:%M:%S")
 
-  =link_to "Convidar novo usuário", ""
+  -# %hr
+
+  -# %h2 Suas assembleias
+
+  -# =link_to "Nova Assembleia", ""
+
+  -# %br
+  -# %br
+
+
+  -# %div
+  -#   - if @moots.count == 0
+  -#     Você não tem nenhuma assembleia. Por que não
+  -#     = link_to "criar uma agora?", ""
+  -#   - else
+  -#     Lista de moots
+
+  -# %hr
+  -# %br
+  -# %br
+
+  -# %h2 Usuários
+
+  -# =link_to "Convidar novo usuário", ""
