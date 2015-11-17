@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+
   resources :companies
+  resources :invites
+
   devise_for :users, controllers: { registrations: "users/registrations" }
+  
   resources :moots
   resources :plans
 

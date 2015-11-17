@@ -6,11 +6,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     build_params
 
+<<<<<<< HEAD
 
     if params[:admin_token]
       session[:admin_token] = params[:admin_token]
     elsif params[:voter_token]
       session[:voter_token] = params[:voter_token]
+=======
+    if session[:plan_id]
+      @plan = Plan.find(session[:plan_id])
+      self.resource.company = Company.new
+      render 'buy'
+    else
+      respond_with self.resource
+>>>>>>> master
     end
     #   @plan = Plan.find(session[:plan_id])
     #   render 'buy'
@@ -23,6 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
+    byebug
 
     # if session[:plan_id]
     #   plan = Plan.find(session[:plan_id])

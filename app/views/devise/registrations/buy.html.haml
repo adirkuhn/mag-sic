@@ -1,0 +1,63 @@
+%h1 Buy 
+
+%p
+  So you wanna buy
+  %strong= @plan.title
+
+.container
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+
+    .p
+      = @plan.title
+    .p
+      = @plan.description
+
+    .p
+      = devise_error_messages!
+
+    .field
+      = f.label :name
+      %br/
+      = f.text_field :name, autofocus: true
+
+    %hr
+    %div
+      %h3 Company Info
+      = f.fields_for :company do |company_form|
+        .field
+          = company_form.label :name
+          %br/
+          = company_form.text_field :name, autofocus: true
+
+        .field
+          = company_form.label :site
+          %br/
+          = company_form.text_field :site, autofocus: true
+
+        .field
+          = company_form.label :cnpj
+          %br/
+          = company_form.text_field :cnpj, autofocus: true
+    %hr
+
+    .field
+      = f.label :email
+      %br/
+      = f.email_field :email, autofocus: true
+
+    .field
+      = f.label :password
+      - if @minimum_password_length
+        %em= "(#{@minimum_password_length} characters minimum)"
+      %br/
+      = f.password_field :password, autocomplete: "off"
+
+    .field
+      = f.label :password_confirmation
+      %br/
+      = f.password_field :password_confirmation, autocomplete: "off"
+
+    .actions
+      = f.submit "Sign up"
+
+  =link_to "Cancel", root_path
