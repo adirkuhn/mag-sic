@@ -6,29 +6,39 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     build_params
 
-    if session[:plan_id]
-      @plan = Plan.find(session[:plan_id])
-      render 'buy'
-    else
-      respond_with self.resource
+
+    if params[:admin_token]
+      session[:admin_token] = params[:admin_token]
+    elsif params[:voter_token]
+      session[:voter_token] = params[:voter_token]
     end
+    #   @plan = Plan.find(session[:plan_id])
+    #   render 'buy'
+    # else
+    #   respond_with self.resource
+    # end
+    respond_with resource
   end
 
   # POST /resource
   def create
     build_resource(sign_up_params)
 
-    if session[:plan_id]
-      plan = Plan.find(session[:plan_id])
-      resource.plan = plan
-      resource.is_admin = true
-    end
+    # if session[:plan_id]
+    #   plan = Plan.find(session[:plan_id])
+    #   resource.plan = plan
+    #   resource.is_admin = true
+    # end
 
     resource.save
     yield resource if block_given?
     if resource.persisted?
 
-      session.delete(:plan_id)
+      if session[:admin_token]
+        setAdmin(resource)
+      elsif session[:voter_token]
+        setVoter(resource)
+      end
 
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
@@ -43,12 +53,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       set_minimum_password_length
 
-      if session[:plan_id]
-        @plan = Plan.find(session[:plan_id])
-        render 'buy'
-      else
-        respond_with resource
-      end
+      # if session[:plan_id]
+      #   @plan = Plan.find(session[:plan_id])
+      #   render 'buy'
+      # else
+      #   respond_with resource
+      # end
+
+      respond_with resource
     end
   end
 
@@ -59,6 +71,36 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource({})
     set_minimum_password_length
     yield resource if block_given?
+  end
+
+  def setAdmin(user)
+
+    invitedAdmin = AdminInvite.where(:token => session[:admin_token]).first
+
+    if invitedAdmin && invitedAdmin.email == user.email
+      companyAdmin = CompanyAdmin.new
+      companyAdmin.company = invitedAdmin.company
+      companyAdmin.user = user
+
+      companyAdmin.save
+    end
+
+    session.delete(:admin_token)
+  end
+
+  def setVoter(user)
+
+    invitedVoter = VoterInvite.where(:token => session[:voter_token]).first
+
+    if invitedVoter && invitedVoter.email == user.email
+      companyVoter = CompanyVoter.new
+      companyVoter.company = invitedVoter.company
+      companyVoter.user = user
+
+      companyVoter.save
+    end
+
+    session.delete(:voter_token)
   end
 
   # # POST /resource

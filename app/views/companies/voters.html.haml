@@ -1,0 +1,35 @@
+%p
+  Return to 
+  = link_to @company.name, @company
+
+
+%h1 Invite a new Voter
+
+= form_for(@voterInvite, url: companies_voters_path) do |f|
+  - if @voterInvite.errors.any?
+    .error_explanation
+      .h2
+        = pluralize(@voterInvite.errors.count, "error")
+        prohibited this invite from being saved:
+
+      %ul
+        - @voterInvite.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :email
+    = f.email_field :email, autofocus: true
+
+  %br
+  %br
+  
+  .actions
+    = f.submit
+
+%hr
+
+%h2 Invited voters
+
+%ul
+  - @company.voter_invite.each do |invited|
+    %li=invited.email

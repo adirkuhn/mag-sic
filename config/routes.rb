@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :companies
   devise_for :users, controllers: { registrations: "users/registrations" }
   resources :moots
   resources :plans
@@ -12,4 +13,17 @@ Rails.application.routes.draw do
   post 'home/choose_plan', as: 'home_choose_plan'
 
   root 'home#index'
+
+
+  #company plans
+  get 'companies/:id/plans', to: 'companies#plans', as: 'companies_plans'
+  get 'companies/:id/plans/:id_plan', to: 'companies#chooseplan', as: 'companies_chooseplan'
+
+  #invite admins and users
+  get 'companies/:id/admins', to: 'companies#admins', as: 'companies_admins'
+  post 'companies/:id/admins', to: 'companies#admins_save', as: 'companies_admins_save'
+
+  get 'companies/:id/voters', to: 'companies#voters', as: 'companies_voters'
+  post 'companies/:id/voters', to: 'companies#voters_save', as: 'companies_voters_save'
+
 end

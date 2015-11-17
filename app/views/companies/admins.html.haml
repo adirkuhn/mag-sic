@@ -1,0 +1,35 @@
+%p
+  Return to 
+  = link_to @company.name, @company
+
+
+%h1 Invite a new admin
+
+= form_for(@adminInvite, url: companies_admins_path) do |f|
+  - if @adminInvite.errors.any?
+    .error_explanation
+      .h2
+        = pluralize(@adminInvite.errors.count, "error")
+        prohibited this invite from being saved:
+
+      %ul
+        - @adminInvite.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :email
+    = f.email_field :email, autofocus: true
+
+  %br
+  %br
+  
+  .actions
+    = f.submit
+
+%hr
+
+%h2 Invited admins
+
+%ul
+  - @company.admin_invite.each do |invited|
+    %li=invited.email

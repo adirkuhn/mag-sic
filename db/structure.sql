@@ -16,6 +16,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `company_admins`
+--
+
+DROP TABLE IF EXISTS `company_admins`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `company_admins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token` varchar(255) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `company_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_company_admins_on_user_id_and_company_id` (`user_id`,`company_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `moots`
 --
 
@@ -49,7 +69,7 @@ CREATE TABLE `plans` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,12 +109,14 @@ CREATE TABLE `users` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `plan_id` int(11) DEFAULT NULL,
+  `cpf` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_users_on_email` (`email`),
   UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`),
+  UNIQUE KEY `index_users_on_cpf` (`cpf`),
   KEY `index_users_on_plan_id` (`plan_id`),
   CONSTRAINT `fk_rails_c7d01481e8` FOREIGN KEY (`plan_id`) REFERENCES `plans` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -106,7 +128,7 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-22 21:12:40
+-- Dump completed on 2015-11-10 20:05:32
 INSERT INTO schema_migrations (version) VALUES ('20151016171023');
 
 INSERT INTO schema_migrations (version) VALUES ('20151016171846');
@@ -114,4 +136,8 @@ INSERT INTO schema_migrations (version) VALUES ('20151016171846');
 INSERT INTO schema_migrations (version) VALUES ('20151016172245');
 
 INSERT INTO schema_migrations (version) VALUES ('20151019231444');
+
+INSERT INTO schema_migrations (version) VALUES ('20151110153228');
+
+INSERT INTO schema_migrations (version) VALUES ('20151110215201');
 

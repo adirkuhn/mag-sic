@@ -1,0 +1,57 @@
+!!! 5
+%html
+%head
+  %title Assembleia :: ADMIN
+  = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true
+  = csrf_meta_tags
+%body
+  %nav.navbar.navbar-default
+    .container
+      .navbar-brand= link_to "Assembleias", root_path
+
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          %li= link_to "Account", edit_user_registration_path
+          %li= link_to "Sign Out", destroy_user_session_path, method: :delete
+
+  .container
+    - if notice
+      %p.alert.alert-info
+        = notice
+    - if alert
+      %p.alert.alert-danger
+        = alert
+
+
+  .container
+    .container-fluid
+      .row
+        .col-md-4
+          %img(alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-circle")
+          %h3
+            = current_user.name
+          %p
+            Último acesso
+            = current_user.last_sign_in_at.strftime("%d/%m/%Y %H:%M:%S")
+          %p
+            = link_to "Sair", destroy_user_session_path, method: :delete
+
+
+          %br
+          %br
+
+          %ul.nav.nav-stacked
+            %li
+              = link_to "Dashboard", admin_index_path
+            %li
+              = link_to "Empresas", companies_path
+            %li
+              = link_to "Assembléias", "#"
+            %li
+              %a(href="#") Profile
+            %li
+              %a(href="#") Messages
+
+        .col-md-8
+          = yield

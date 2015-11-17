@@ -1,0 +1,97 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @company.name %>
+</p>
+
+<p>
+  <strong>Site:</strong>
+  <%= @company.site %>
+</p>
+
+<p>
+  <strong>CNPJ:</strong>
+  <%= @company.cnpj %>
+</p>
+
+<hr/>
+
+<h3> Plano </h3>
+<% unless @company.plan %>
+	<% #link_to "Selecionar plano", "#chooseplan", {"data-toggle": "modal", "data-target": "#myModal"} 
+	%>
+	<%= link_to "Selecionar Plano", companies_plans_path(:id => @company.id) %>
+<% else %>
+	<%= @company.plan.title %>
+<% end %>
+
+<hr/>
+
+<h3>Admins</h3>
+
+<%= link_to "Novo Admin", companies_admins_path %>
+
+	<table class="table">
+		<thead>
+			<th>Name</th>
+			<th>CPF</th>
+			<th>Email</th>
+		</thead>
+		<tbody>
+			<% @company.admins.each do |admin| %>
+				<tr>
+					<td> <%= admin.name %> </td>
+					<td> <%= admin.cpf %> </td>
+					<td> <%= admin.email %> </td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+<hr/>
+
+<h3>Eleitores</h3>
+<%= link_to "Novo Eleitor", companies_voters_path %>
+
+  <table class="table">
+    <thead>
+      <th>Name</th>
+      <th>CPF</th>
+      <th>Email</th>
+    </thead>
+    <tbody>
+      <% @company.voters.each do |voter| %>
+        <tr>
+          <td> <%= voter.name %> </td>
+          <td> <%= voter.cpf %> </td>
+          <td> <%= voter.email %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<hr/>
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Escolha o plano</h4>
+        </div>
+        <div class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>

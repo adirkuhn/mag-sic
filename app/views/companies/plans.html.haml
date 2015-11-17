@@ -1,0 +1,16 @@
+%h3 
+  Escolher plano de assinatura para
+  = @company.name
+
+%table.table
+  %thead
+    %tr
+      %th
+        Plano
+      %th
+        Max de Assembléias por ano
+  %tbody
+    -@plans.each do |plan|
+      %tr
+        %td= link_to plan.title, companies_chooseplan_path(:id => @company, :id_plan => plan)
+        %td= plan.max_moot_per_year
