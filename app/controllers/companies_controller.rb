@@ -91,7 +91,7 @@ class CompaniesController < ApplicationController
 
     email = params[:admin_invite][:email]
 
-    user = User.where("email = ? OR cpf = ?", email, email)
+    user = User.where("email = ? OR cpf = ?", email, email).first
 
     if user.blank?
       adminInvite = AdminInvite.new
@@ -130,7 +130,7 @@ class CompaniesController < ApplicationController
 
     email = params[:voter_invite][:email]
 
-    user = User.where("email = ? OR cpf = ?", email, email)
+    user = User.where("email = ? OR cpf = ?", email, email).first
 
     if user.blank?
       voterInvite = VoterInvite.new
