@@ -65,7 +65,10 @@ ActiveRecord::Schema.define(version: 201511110214202) do
     t.datetime "voting_ending_at"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "company_id"
   end
+
+  add_index "moots", ["company_id"], name: "index_moots_on_company_id"
 
   create_table "plans", force: :cascade do |t|
     t.string   "title"

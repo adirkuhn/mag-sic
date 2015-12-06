@@ -1,4 +1,4 @@
-<%= form_for(@moot) do |f| %>
+<%= form_for [@moot.company, @moot] do |f| %>
   <% if @moot.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@moot.errors.count, "error") %> prohibited this moot from being saved:</h2>
@@ -28,6 +28,6 @@
     <%= f.datetime_select :voting_ending_at %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit  "Salvar" %>
   </div>
 <% end %>

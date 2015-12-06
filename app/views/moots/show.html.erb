@@ -20,5 +20,5 @@
   <%= @moot.voting_ending_at %>
 </p>
 
-<%= link_to 'Edit', edit_moot_path(@moot) %> |
-<%= link_to 'Back', moots_path %>
+<%= link_to 'Edit', [:edit, @moot.company, @moot] %> |
+<%= link_to 'Back', @moot.company %>

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :companies
+  resources :companies do
+    resources :moots#, shallow: true
+  end
   devise_for :users, controllers: { registrations: "users/registrations" }
-  resources :moots
+  #resources :moots
   resources :plans
 
   #admin

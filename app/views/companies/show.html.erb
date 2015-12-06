@@ -72,6 +72,33 @@
   </table>
 
 <hr/>
+
+<h3>Assembléis</h3>
+
+<%= link_to 'Nova Assembléis', new_company_moot_path(@company) %>
+
+<table class="table">
+  <thead>
+    <th>Asembleia</th>
+    <th>Iniciada em</th>
+    <th>Status</th>
+    <th>Acoes</th>
+  </thead>
+  <tbody>
+    <% @company.moots.each do |moot| %>
+      <tr>
+        <td> <%= moot.title %> </td>
+        <td> 0101010101 </td>
+        <td> shshshshshhs </td>
+        <td> <%= link_to "Ver", [moot.company, moot] %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  
+
+<hr/>
+
 <%= link_to 'Edit', edit_company_path(@company) %> |
 <%= link_to 'Back', companies_path %>
 
