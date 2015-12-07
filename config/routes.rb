@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
+  get 'attachments/create'
+
   resources :companies do
     resources :moots#, shallow: true
   end
   devise_for :users, controllers: { registrations: "users/registrations" }
   #resources :moots
   resources :plans
+
+  resource :attachments
 
   #admin
   get 'admin/index'

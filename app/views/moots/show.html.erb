@@ -24,10 +24,21 @@
 
 <h2>Arquivos</h2>
 
-<%= form_for Upload.new, :url => uploads_path, html: { multipart: true } do |f| %>
-  <%= f.label :uploaded_file, t('.upload_new_file') %>
-  <%= f.file_field :uploaded_file, multiple: true, name: 'upload[uploaded_file]' %>
-  <%= f.submit t(:save), class: 'btn' %>
+<% if @moot.attachments.empty? %>
+  - sem arquivos
+<% else %>
+  <ul>
+    <% @moot.attachments.each do |att| %>
+      <li> <%= link_to att.path, att.path.url %> </li>
+    <% end %>
+  </ul>
+<% end %>
+<br><br>
+<%= form_for @moot.attachments.new, html: { multipart: true } do |f| %>
+  <%= f.label :attachments, t('.upload_new_file') %>
+    <%= file_field_tag "path[]", type: :file, multiple: true %>
+  <%= f.hidden_field :moot, :value => @moot.id %>
+  <%= f.submit "Salvar", class: 'btn' %>
 <% end %>
 
 <% # jquery upload template # %>
