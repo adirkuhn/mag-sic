@@ -20,5 +20,25 @@
   <%= @moot.voting_ending_at %>
 </p>
 
+<hr/>
+
+<h2>Arquivos</h2>
+
+<%= form_for Upload.new, :url => uploads_path, html: { multipart: true } do |f| %>
+  <%= f.label :uploaded_file, t('.upload_new_file') %>
+  <%= f.file_field :uploaded_file, multiple: true, name: 'upload[uploaded_file]' %>
+  <%= f.submit t(:save), class: 'btn' %>
+<% end %>
+
+<% # jquery upload template # %>
+<script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="bar" style="width: 0%"></div></div></div></script>
+
+<hr/>
+
+<h2>Pautas</h2>
+
+<hr/>
+<br/><br/>
+
 <%= link_to 'Edit', [:edit, @moot.company, @moot] %> |
 <%= link_to 'Back', @moot.company %>
