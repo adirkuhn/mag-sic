@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 201511110214202) do
 
   add_index "admin_invites", ["token", "user_id", "company_id"], name: "index_admin_invites_on_token_and_user_id_and_company_id", unique: true
 
+  create_table "attachments", force: :cascade do |t|
+    t.string   "path_file_name"
+    t.string   "path_content_type"
+    t.integer  "path_file_size"
+    t.datetime "path_updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
   create_table "companies", force: :cascade do |t|
     t.string   "name"
     t.string   "site"
