@@ -90,6 +90,17 @@ ActiveRecord::Schema.define(version: 201511110214202) do
     t.datetime "updated_at",        null: false
   end
 
+  create_table "rullings", force: :cascade do |t|
+    t.string   "title"
+    t.string   "objective"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "moot_id"
+  end
+
+  add_index "rullings", ["moot_id"], name: "index_rullings_on_moot_id"
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                             default: "", null: false
     t.string   "encrypted_password",                default: "", null: false

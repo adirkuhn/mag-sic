@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   get 'attachments/create'
 
   resources :companies do
-    resources :moots#, shallow: true
+    resources :moots do #, shallow: true
+      resources :rullings
+    end
   end
   devise_for :users, controllers: { registrations: "users/registrations" }
   #resources :moots

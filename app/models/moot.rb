@@ -4,4 +4,7 @@ class Moot < ActiveRecord::Base
 
   #attachments
   has_many :attachments
+
+  #rulings
+  has_many :rullings
 end
