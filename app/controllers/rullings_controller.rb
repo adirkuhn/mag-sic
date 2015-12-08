@@ -1,5 +1,6 @@
 class RullingsController < ApplicationController
   before_action :set_rulling, only: [:show, :edit, :update, :destroy]
+  before_action :find_moot, only: [:new, :create]
 
   # GET /rullings
   # GET /rullings.json
@@ -14,7 +15,7 @@ class RullingsController < ApplicationController
 
   # GET /rullings/new
   def new
-    @rulling = Rulling.new
+    @rulling = @moot.rullings.build
   end
 
   # GET /rullings/1/edit
@@ -24,11 +25,11 @@ class RullingsController < ApplicationController
   # POST /rullings
   # POST /rullings.json
   def create
-    @rulling = Rulling.new(rulling_params)
+    @rulling = @moot.rullings.build(rulling_params)
 
     respond_to do |format|
       if @rulling.save
-        format.html { redirect_to @rulling, notice: 'Rulling was successfully created.' }
+        format.html { redirect_to [@rulling.moot.company, @rulling.moot], notice: 'Rulling was successfully created.' }
         format.json { render :show, status: :created, location: @rulling }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class RullingsController < ApplicationController
   def update
     respond_to do |format|
       if @rulling.update(rulling_params)
-        format.html { redirect_to @rulling, notice: 'Rulling was successfully updated.' }
+        format.html { redirect_to [@rulling.moot.company, @rulling.moot], notice: 'Rulling was successfully updated.' }
         format.json { render :show, status: :ok, location: @rulling }
       else
         format.html { render :edit }
@@ -65,6 +66,10 @@ class RullingsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_rulling
       @rulling = Rulling.find(params[:id])
+    end
+
+    def find_moot
+      @moot = Moot.find(params[:moot_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

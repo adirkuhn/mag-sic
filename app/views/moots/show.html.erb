@@ -49,6 +49,23 @@
 <h2>Pautas</h2>
 <%= link_to "Nova Pauta", new_company_moot_rulling_path(@moot.company, @moot) %>
 
+<table class="table">
+  <thead>
+    <th>Pauta</th>
+    <th>Objetivo</th>
+    <th>Acoes</th>
+  </thead>
+  <tbody>
+    <% @moot.rullings.each do |rulling| %>
+      <tr>
+        <td> <%= rulling.title %> </td>
+        <td> <%= rulling.objective %> </td>
+        <td> <%= link_to "Ver", company_moot_rulling_path(rulling.moot.company, rulling.moot, rulling) %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <hr/>
 <br/><br/>
 

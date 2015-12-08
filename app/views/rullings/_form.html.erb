@@ -1,4 +1,4 @@
-<%= form_for(@rulling) do |f| %>
+<%= form_for [@rulling.moot.company, @rulling.moot, @rulling] do |f| %>
   <% if @rulling.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@rulling.errors.count, "error") %> prohibited this rulling from being saved:</h2>
