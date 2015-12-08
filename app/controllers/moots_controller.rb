@@ -43,7 +43,7 @@ class MootsController < ApplicationController
   def update
     respond_to do |format|
       if @moot.update(moot_params)
-        format.html { redirect_to company_moot_path(@moot), notice: 'Moot was successfully updated.' }
+        format.html { redirect_to [@moot.company, @moot], notice: 'Moot was successfully updated.' }
         format.json { render :show, status: :ok, location: @moot }
       else
         format.html { render :edit }
@@ -55,9 +55,10 @@ class MootsController < ApplicationController
   # DELETE /moots/1
   # DELETE /moots/1.json
   def destroy
+    company = @moot.company
     @moot.destroy
     respond_to do |format|
-      format.html { redirect_to moots_url, notice: 'Moot was successfully destroyed.' }
+      format.html { redirect_to [company], notice: 'Moot was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
