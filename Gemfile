@@ -12,7 +12,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise', '~> 3.5.2'
 gem 'haml', '~> 4.0.7'
 gem 'bootstrap-sass', '~> 3.3.5.1'
-
+gem 'jquery-fileupload-rails'
+gem "paperclip", "~> 4.3"
 
 group :development, :test do
   gem 'sqlite3'
@@ -20,5 +21,6 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'seed_dump', '~> 3.2', '>= 3.2.3'
 end
 

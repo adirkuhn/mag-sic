@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @rulling.title %>
+</p>
+
+<p>
+  <strong>Objective:</strong>
+  <%= @rulling.objective %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @rulling.description %>
+</p>
+
+<%= link_to 'Edit', edit_company_moot_rulling_path(@rulling.moot.company, @rulling.moot, @rulling) %> |
+<%= link_to 'Back', [@rulling.moot.company, @rulling.moot] %>

@@ -14,6 +14,9 @@ class Company < ActiveRecord::Base
   has_many :admin_invite
   has_many :voter_invite
 
+  #moots
+  has_many :moots
+
   #validates
   validates_length_of :cnpj, :minimum => 14, :maximum => 14, :allow_blank => false
   validates_presence_of :name

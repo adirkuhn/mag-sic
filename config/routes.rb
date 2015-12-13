@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
-  resources :companies
+  get 'attachments/create'
+
+  resources :companies do
+    resources :moots do #, shallow: true
+      resources :rullings
+    end
+  end
   devise_for :users, controllers: { registrations: "users/registrations" }
-  resources :moots
+  #resources :moots
   resources :plans
+
+  resource :attachments
 
   #admin
   get 'admin/index'

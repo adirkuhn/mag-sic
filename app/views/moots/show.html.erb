@@ -20,5 +20,54 @@
   <%= @moot.voting_ending_at %>
 </p>
 
-<%= link_to 'Edit', edit_moot_path(@moot) %> |
-<%= link_to 'Back', moots_path %>
+<hr/>
+
+<h2>Arquivos</h2>
+
+<% if @moot.attachments.empty? %>
+  - sem arquivos
+<% else %>
+  <ul>
+    <% @moot.attachments.each do |att| %>
+      <li> <%= link_to att.path, att.path.url %> </li>
+    <% end %>
+  </ul>
+<% end %>
+<br><br>
+<%= form_for @moot.attachments.new, html: { multipart: true } do |f| %>
+  <%= f.label :attachments, t('.upload_new_file') %>
+    <%= file_field_tag "path[]", type: :file, multiple: true %>
+  <%= f.hidden_field :moot, :value => @moot.id %>
+  <%= f.submit "Salvar", class: 'btn' %>
+<% end %>
+
+<% # jquery upload template # %>
+<script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="bar" style="width: 0%"></div></div></div></script>
+
+<hr/>
+
+<h2>Pautas</h2>
+<%= link_to "Nova Pauta", new_company_moot_rulling_path(@moot.company, @moot) %>
+
+<table class="table">
+  <thead>
+    <th>Pauta</th>
+    <th>Objetivo</th>
+    <th>Acoes</th>
+  </thead>
+  <tbody>
+    <% @moot.rullings.each do |rulling| %>
+      <tr>
+        <td> <%= rulling.title %> </td>
+        <td> <%= rulling.objective %> </td>
+        <td> <%= link_to "Ver", company_moot_rulling_path(rulling.moot.company, rulling.moot, rulling) %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr/>
+<br/><br/>
+
+<%= link_to 'Edit', [:edit, @moot.company, @moot] %> |
+<%= link_to 'Back', @moot.company %>

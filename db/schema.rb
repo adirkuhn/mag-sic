@@ -25,6 +25,18 @@ ActiveRecord::Schema.define(version: 201511110214202) do
 
   add_index "admin_invites", ["token", "user_id", "company_id"], name: "index_admin_invites_on_token_and_user_id_and_company_id", unique: true
 
+  create_table "attachments", force: :cascade do |t|
+    t.string   "path_file_name"
+    t.string   "path_content_type"
+    t.integer  "path_file_size"
+    t.datetime "path_updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "moot_id"
+  end
+
+  add_index "attachments", ["moot_id"], name: "index_attachments_on_moot_id"
+
   create_table "companies", force: :cascade do |t|
     t.string   "name"
     t.string   "site"
@@ -65,7 +77,10 @@ ActiveRecord::Schema.define(version: 201511110214202) do
     t.datetime "voting_ending_at"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "company_id"
   end
+
+  add_index "moots", ["company_id"], name: "index_moots_on_company_id"
 
   create_table "plans", force: :cascade do |t|
     t.string   "title"
@@ -74,6 +89,17 @@ ActiveRecord::Schema.define(version: 201511110214202) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
+
+  create_table "rullings", force: :cascade do |t|
+    t.string   "title"
+    t.string   "objective"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "moot_id"
+  end
+
+  add_index "rullings", ["moot_id"], name: "index_rullings_on_moot_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                             default: "", null: false

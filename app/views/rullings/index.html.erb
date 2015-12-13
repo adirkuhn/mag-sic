@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Rullings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Objective</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rullings.each do |rulling| %>
+      <tr>
+        <td><%= rulling.title %></td>
+        <td><%= rulling.objective %></td>
+        <td><%= rulling.description %></td>
+        <td><%= link_to 'Show', rulling %></td>
+        <td><%= link_to 'Edit', edit_rulling_path(rulling) %></td>
+        <td><%= link_to 'Destroy', rulling, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rulling', new_rulling_path %>

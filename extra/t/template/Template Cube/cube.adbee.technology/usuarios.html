@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title>Teste Funcional</title>
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css"/>
+
+        <script src="js/demo-rtl.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="css/libs/font-awesome.css"/>
+        <link rel="stylesheet" type="text/css" href="css/libs/nanoscroller.css"/>
+
+        <link rel="stylesheet" type="text/css" href="css/compiled/theme_styles.css"/>
+
+
+        <link type="image/x-icon" href="favicon.png" rel="shortcut icon"/>
+
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300|Titillium+Web:200,300,400' rel='stylesheet' type='text/css'>
+        <!--[if lt IE 9]>
+                        <script src="js/html5shiv.js"></script>
+                        <script src="js/respond.min.js"></script>
+                <![endif]-->
+        
+    </head>
+    <body>
+        <div id="theme-wrapper">
+            <header class="navbar" id="header-navbar">
+                <div class="container">
+                    <a href="index.html" id="logo" class="navbar-brand">
+                        
+                    </a>
+                    <div class="clearfix">
+                        <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="fa fa-bars"></span>
+                        </button>
+                        <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs">
+                            <ul class="nav navbar-nav pull-left">
+                                
+                            </ul>
+                        </div>
+                        <div class="nav-no-collapse pull-right" id="header-nav">
+                            <ul class="nav navbar-nav pull-right">
+                                <li class="mobile-search">
+                                    <a class="btn">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                    <div class="drowdown-search">
+                                        <form role="search">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Search...">
+                                                <i class="fa fa-search nav-search-icon"></i>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </li>
+                                <li class="dropdown profile-dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <img src="img/samples/scarlet-159.png" alt=""/>
+                                        <span class="hidden-xs">Usuário Logado</span> <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="user-profile.html"><i class="fa fa-user"></i>Profile</a></li>
+                                        <li><a href="#"><i class="fa fa-cog"></i>Settings</a></li>
+                                        <li><a href="#"><i class="fa fa-envelope-o"></i>Messages</a></li>
+                                        <li><a href="#"><i class="fa fa-power-off"></i>Logout</a></li>
+                                    </ul>
+                                </li>
+                                <li class="hidden-xxs">
+                                    <a class="btn">
+                                        <i class="fa fa-power-off"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div id="page-wrapper" class="container">
+                <div class="row">
+                    <div id="nav-col">
+                        
+                        <div id="nav-col-submenu"></div>
+                    </div>
+                    <div id="content-wrapper"><div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <ol class="breadcrumb">
+                                            <li><a href="#">Home</a></li>
+                                            <li class="active"><span>Users</span></li>
+                                        </ol>
+                                        <div class="clearfix">
+                                            <h1 class="pull-left">Users</h1>
+                                            <div class="pull-right top-page-ui">
+                                                <a href="#" class="btn btn-primary pull-right">
+                                                    <i class="fa fa-plus-circle fa-lg"></i> Add user
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="main-box no-header clearfix">
+                                            <div class="main-box-body clearfix">
+                                                <div class="table-responsive">
+                                                    <table class="table user-list table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th><span>User</span></th>
+                                                                <th><span>Created</span></th>
+                                                                <th class="text-center"><span>Status</span></th>
+                                                                <th><span>Email</span></th>
+                                                                <th>&nbsp;</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="#" class="user-link">Scarlett Johansson</a>
+                                                                    <span class="user-subhead">Admin</span>
+                                                                </td>
+                                                                <td>
+                                                                    2013/08/08
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <span class="label label-default">Inactive</span>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="#">teste@nicholson</a>
+                                                                </td>
+                                                                <td style="width: 20%;">
+                                                                    <a href="#" class="table-link">
+                                                                        <span class="fa-stack">
+                                                                            <i class="fa fa-square fa-stack-2x"></i>
+                                                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                    <a href="#" class="table-link">
+                                                                        <span class="fa-stack">
+                                                                            <i class="fa fa-square fa-stack-2x"></i>
+                                                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                    <a href="#" class="table-link danger">
+                                                                        <span class="fa-stack">
+                                                                            <i class="fa fa-square fa-stack-2x"></i>
+                                                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="#" class="user-link">Robert Downey Jr.</a>
+                                                                    <span class="user-subhead">Member</span>
+                                                                </td>
+                                                                <td>
+                                                                    2013/08/12
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <span class="label label-success">Active</span>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="#">teste2@nicholson</a>
+                                                                </td>
+                                                                <td style="width: 20%;">
+                                                                    <a href="#" class="table-link">
+                                                                        <span class="fa-stack">
+                                                                            <i class="fa fa-square fa-stack-2x"></i>
+                                                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                    <a href="#" class="table-link">
+                                                                        <span class="fa-stack">
+                                                                            <i class="fa fa-square fa-stack-2x"></i>
+                                                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                    <a href="#" class="table-link danger">
+                                                                        <span class="fa-stack">
+                                                                            <i class="fa fa-square fa-stack-2x"></i>
+                                                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="#" class="user-link">Ryan Gossling</a>
+                                                                    <span class="user-subhead">Registered</span>
+                                                                </td>
+                                                                <td>
+                                                                    2013/03/03
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <span class="label label-danger">Banned</span>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="#">jack@nicholson</a>
+                                                                </td>
+                                                                <td style="width: 20%;">
+                                                                    <a href="#" class="table-link">
+                                                                        <span class="fa-stack">
+                                                                            <i class="fa fa-square fa-stack-2x"></i>
+                                                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                    <a href="#" class="table-link">
+                                                                        <span class="fa-stack">
+                                                                            <i class="fa fa-square fa-stack-2x"></i>
+                                                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                    <a href="#" class="table-link danger">
+                                                                        <span class="fa-stack">
+                                                                            <i class="fa fa-square fa-stack-2x"></i>
+                                                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                                                        </span>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                                                                                        
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <footer id="footer-bar" class="row">
+                            <p id="footer-copyright" class="col-xs-12">
+                                Robusta
+                            </p>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+        <script src="js/demo-skin-changer.js"></script>  
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/jquery.nanoscroller.min.js"></script>
+        <script src="js/demo.js"></script>  
+
+
+        <script src="js/scripts.js"></script>
+        <script src="js/pace.min.js"></script>
+
+    </body>
+</html>

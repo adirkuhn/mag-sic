@@ -1,5 +1,6 @@
 class MootsController < ApplicationController
   before_action :set_moot, only: [:show, :edit, :update, :destroy]
+  before_action :find_company, only: [:new, :create]
 
   # GET /moots
   # GET /moots.json
@@ -14,7 +15,7 @@ class MootsController < ApplicationController
 
   # GET /moots/new
   def new
-    @moot = Moot.new
+    @moot = @company.moots.build
   end
 
   # GET /moots/1/edit
@@ -24,11 +25,11 @@ class MootsController < ApplicationController
   # POST /moots
   # POST /moots.json
   def create
-    @moot = Moot.new(moot_params)
+    @moot = @company.moots.build(moot_params)
 
     respond_to do |format|
       if @moot.save
-        format.html { redirect_to @moot, notice: 'Moot was successfully created.' }
+        format.html { redirect_to [@moot.company, @moot], notice: 'Moot was successfully created.' }
         format.json { render :show, status: :created, location: @moot }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class MootsController < ApplicationController
   def update
     respond_to do |format|
       if @moot.update(moot_params)
-        format.html { redirect_to @moot, notice: 'Moot was successfully updated.' }
+        format.html { redirect_to [@moot.company, @moot], notice: 'Moot was successfully updated.' }
         format.json { render :show, status: :ok, location: @moot }
       else
         format.html { render :edit }
@@ -54,9 +55,10 @@ class MootsController < ApplicationController
   # DELETE /moots/1
   # DELETE /moots/1.json
   def destroy
+    company = @moot.company
     @moot.destroy
     respond_to do |format|
-      format.html { redirect_to moots_url, notice: 'Moot was successfully destroyed.' }
+      format.html { redirect_to [company], notice: 'Moot was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +67,10 @@ class MootsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_moot
       @moot = Moot.find(params[:id])
+    end
+
+    def find_company
+      @company = Company.find(params[:company_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
