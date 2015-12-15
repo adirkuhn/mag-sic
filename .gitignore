@@ -35,4 +35,9 @@ bower.json
 .powenv
 
 #mac hidden files
-*.DS_Store
+*.DS_Store*
+.DS_Store
+*/.DS_Store
+extra/.DS_Store
+extra/t/.DS_Store
+extra/t/template/.DS_Store
