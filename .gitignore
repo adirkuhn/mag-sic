@@ -33,3 +33,6 @@ bower.json
 
 # Ignore pow environment settings
 .powenv
+
+#mac hidden files
+*.DS_Store
