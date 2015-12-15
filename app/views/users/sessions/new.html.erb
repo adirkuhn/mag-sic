@@ -4,6 +4,13 @@
       <div id="login-box-holder">
         <div class="row">
           <div class="col-xs-12">
+            <% if alert %>
+              <div class="alert alert-danger fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="fa fa-times-circle fa-fw fa-lg"></i>
+                <%= alert %>
+              </div>
+            <% end %>
             <header id="login-header">
               <div id="login-logo">
                 <p>Entrar</p>

@@ -18,13 +18,13 @@
               %li= link_to "Account", edit_user_registration_path
               %li= link_to "Sign Out", destroy_user_session_path, method: :delete
 
-    .container
-      - if notice
-        %p.alert.alert-info
-          = notice
-      - if alert
-        %p.alert.alert-danger
-          = alert
+    / .container
+    /   - if notice
+    /     %p.alert.alert-info
+    /       = notice
+    /   - if alert
+    /     %p.alert.alert-danger
+    /       = alert
 
 
     .container
