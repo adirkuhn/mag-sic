@@ -5,13 +5,15 @@
     = stylesheet_link_tag    'application', params[:controller], media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', params[:controller], 'data-turbolinks-track' => true
     = csrf_meta_tags
-%body
-  %nav.navbar.navbar-default
-    .container
-      .navbar-brand= link_to "Assembleias", root_path
+%body.theme-whbl.pace-done
+  .theme-wrapper
+    %header#header-navbar.navbar
+      .container
+        = link_to "Assembleias", root_path, class: "navbar-brand"
 
-      %ul.nav.navbar-nav.navbar-right
-        %li= link_to "Sign In", new_user_session_path
+        .clearfix
+          %ul.nav.navbar-nav.navbar-right
+            %li= link_to "Entrar", new_user_session_path
 
-  .container
-    = yield
+    %div#page-wrapper.container
+      = yield
