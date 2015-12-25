@@ -41,3 +41,7 @@ bower.json
 extra/.DS_Store
 extra/t/.DS_Store
 extra/t/template/.DS_Store
+
+#idea
+.idea
+.idea/*
