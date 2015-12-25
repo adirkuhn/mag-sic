@@ -17,6 +17,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # else
     #   respond_with self.resource
     # end
+
+    @securityQuestions = SecurityQuestion.all
     respond_with resource
   end
 
