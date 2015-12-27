@@ -161,7 +161,12 @@
 
 <h3>Assembléis</h3>
 
-<%= link_to 'Nova Assembléis', new_company_moot_path(@company) %>
+<a href="<%= new_company_moot_path(@company) %>">
+  <button type="button" class="btn btn-primary">
+    <span class="fa fa-plus">&nbsp;</span>
+    Criar nova assembléia
+  </button>
+</a>
 
 <table class="table colored white-bg table-striped table-hover">
   <thead>
@@ -174,8 +179,14 @@
     <% @company.moots.each do |moot| %>
       <tr>
         <td> <%= moot.title %> </td>
-        <td> 0101010101 </td>
-        <td> shshshshshhs </td>
+        <td> <%= moot.voting_start_at.strftime("%d/%m/%Y %H:%M") %> </td>
+        <td>
+          <% if moot.voting_ending_at > Date.today %>
+            <span class="label label-success">Aberta</span>
+          <% else %>
+            <span class="label label-warning">Encerrada</span>
+          <% end %>
+        </td>
         <td> <%= link_to "Ver", [moot.company, moot] %> </td>
       </tr>
     <% end %>

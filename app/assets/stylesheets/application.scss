@@ -14,3 +14,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+
+.no_anchor_decoration, a:hover {
+    text-decoration: none !important;
+    color: #000;
+}
+
+.archor_text_color_white {
+    color: #FFFFFF !important;
+}
+
+.infobox-value2 {
+    font-size: 1.3em !important;
+}

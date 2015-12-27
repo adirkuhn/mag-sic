@@ -13,5 +13,7 @@ Rails.application.config.assets.precompile += [
     "devise/sessions.js", "devise/sessions.css",
     "users/registrations.js", "users/registrations.css",
     "admin.js", "admin.css",
-    "companies.js", "companies.css"
+    "companies.js", "companies.css",
+    "moots.js", "moots.css",
+    "rullings.js", "rullings.css"
 ]

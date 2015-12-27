@@ -1,4 +1,7 @@
 class MootsController < ApplicationController
+
+  layout 'admin-application'
+
   before_action :set_moot, only: [:show, :edit, :update, :destroy]
   before_action :find_company, only: [:new, :create]
 
