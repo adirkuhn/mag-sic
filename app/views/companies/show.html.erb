@@ -1,83 +1,169 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @company.name %>
-</p>
+<div class="row">
 
-<p>
-  <strong>Site:</strong>
-  <%= @company.site %>
-</p>
+  <a href="<%= companies_path %>">
+    <button type="button" class="btn btn-default">
+      <span class="fa fa-arrow-left">&nbsp;</span>
+      Voltar
+    </button>
+  </a>
 
-<p>
-  <strong>CNPJ:</strong>
-  <%= @company.cnpj %>
-</p>
+  <div class="clearfix"><br><br></div>
 
-<hr/>
+  <div id="user-profile" class="row">
 
-<h3> Plano </h3>
-<% unless @company.plan %>
-	<% #link_to "Selecionar plano", "#chooseplan", {"data-toggle": "modal", "data-target": "#myModal"} 
-	%>
-	<%= link_to "Selecionar Plano", companies_plans_path(:id => @company.id) %>
-<% else %>
-	<%= @company.plan.title %>
-<% end %>
+    <div class="col-lg-3 col-md-4 col-sm-4">
+      <div class="main-box clearfix">
+        <header class="main-box-header clearfix">
+          <div align="center">
+            <h2><%= @company.name %></h2>
+          </div>
+        </header>
+        <div class="main-box-body clearfix">
 
-<hr/>
+          <div class="profile-since">
+            <%= @company.cnpj %>
+          </div>
+          <div class="profile-details">
+            <ul class="fa-ul">
+              <li><i class="fa-li fa fa-globe"></i> <%= @company.site %></li>
+              <li><i class="fa-li fa fa-map-marker"></i>Rua abc da lorem ipsum, 123</li>
+            </ul>
+          </div>
+          <div class="profile-message-btn center-block text-center">
+            <a href="<%= edit_company_path(@company) %>" class="btn btn-success">
+              <i class="fa fa-pencil"></i>
+              Editar
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<h3>Admins</h3>
+    <div class="col-lg-9 col-md-8 col-sm-8">
+      <div class="main-box clearfix">
+        <div class="tabs-wrapper profile-tabs">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-info" data-toggle="tab">Informações</a></li>
+            <li><a href="#tab-admins" data-toggle="tab">Administradores</a></li>
+            <li><a href="#tab-membros" data-toggle="tab">Membros</a></li>
+          </ul>
+          <div class="tab-content">
 
-<%= link_to "Novo Admin", companies_admins_path %>
+            <div class="tab-pane fade in active" id="tab-info">
+              <h3>Pagamentos</h3>
+              <p>
+                Forma de pagamento (definir o que exibir aqui)
+                <br><br>
+                - Atualizar forma de pagamento<br>
+                - Historico de pagamentos
+              </p>
 
-	<table class="table">
-		<thead>
-			<th>Name</th>
-			<th>CPF</th>
-			<th>Email</th>
-		</thead>
-		<tbody>
-			<% @company.admins.each do |admin| %>
-				<tr>
-					<td> <%= admin.name %> </td>
-					<td> <%= admin.cpf %> </td>
-					<td> <%= admin.email %> </td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
+              <h3>Uso da conta</h3>
 
-<hr/>
+              <h3>Plano atual</h3>
+              <div class="row">
 
-<h3>Eleitores</h3>
-<%= link_to "Novo Eleitor", companies_voters_path %>
+                <% unless @company.plan %>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="main-box infographic-box colored red-bg">
+                    <%= link_to "Selecionar Plano", companies_plans_path(:id => @company.id) %>
+                  </div>
+                </div>
+                <% else %>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="main-box infographic-box">
+                    <h2>R$ 99,99</h2>
+                    <hr/>
+                    <span><%= @company.plan.title %></span>
+                    <br>
+                    <hr/>
+                    <button type="button" class="btn btn-primary"><span class="fa fa-pencil"></span> Mudar de plano</button>
+                  </div>
+                </div>
 
-  <table class="table">
-    <thead>
-      <th>Name</th>
-      <th>CPF</th>
-      <th>Email</th>
-    </thead>
-    <tbody>
-      <% @company.voters.each do |voter| %>
-        <tr>
-          <td> <%= voter.name %> </td>
-          <td> <%= voter.cpf %> </td>
-          <td> <%= voter.email %> </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+                <% end %>
 
-<hr/>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab-admins">
+
+              <button type="button" class="btn btn-primary">
+                <span class="fa fa-plus">&nbsp;</span>
+                <%= link_to "Adicionar novo administrador", companies_admins_path, class: "no_anchor_decoration archor_text_color_white" %>
+              </button>
+              <hr/>
+
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th><span>Nome</span></th>
+                      <th><span>CPF</span></th>
+                      <th><span>Email</span></th>
+                      <th><span>Ações</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @company.admins.each do |admin| %>
+                    <tr>
+                      <td> <%= admin.name %> </td>
+                      <td> <%= admin.cpf %> </td>
+                      <td> <%= admin.email %> </td>
+                      <td> Editar? | Remover? </td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="tab-pane clearfix fade" id="tab-membros">
+
+              <button type="button" class="btn btn-primary" href="banana">
+                <span class="fa fa-plus">&nbsp;</span>
+                <%= link_to "Adicionar novo membro", companies_voters_path, class: "no_anchor_decoration archor_text_color_white" %>
+              </button>
+              <hr/>
+
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th><span>Nome</span></th>
+                      <th><span>CPF</span></th>
+                      <th><span>Email</span></th>
+                      <th><span>Ações</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @company.voters.each do |voter| %>
+                    <tr>
+                      <td> <%= voter.name %> </td>
+                      <td> <%= voter.cpf %> </td>
+                      <td> <%= voter.email %> </td>
+                      <td> Editar | Remover? </td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <h3>Assembléis</h3>
 
 <%= link_to 'Nova Assembléis', new_company_moot_path(@company) %>
 
-<table class="table">
+<table class="table colored white-bg table-striped table-hover">
   <thead>
     <th>Asembleia</th>
     <th>Iniciada em</th>
@@ -98,9 +184,6 @@
   
 
 <hr/>
-
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
