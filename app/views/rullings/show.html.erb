@@ -1,19 +1,12 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
 
-<p>
-  <strong>Title:</strong>
-  <%= @rulling.title %>
-</p>
+  <a href="<%= company_moot_path(@rulling.moot.company, @rulling.moot) %>">
+    <button type="button" class="btn btn-default">
+      <span class="fa fa-arrow-left">&nbsp;</span>
+      Voltar
+    </button>
+  </a>
+  <br/><br/><br/>
 
-<p>
-  <strong>Objective:</strong>
-  <%= @rulling.objective %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @rulling.description %>
-</p>
-
-<%= link_to 'Edit', edit_company_moot_rulling_path(@rulling.moot.company, @rulling.moot, @rulling) %> |
-<%= link_to 'Back', [@rulling.moot.company, @rulling.moot] %>
+  <%= render 'show' %>
+</div>

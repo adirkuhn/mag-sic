@@ -1,5 +1,7 @@
 class Attachment < ActiveRecord::Base
   belongs_to :moot
+  belongs_to :rulling
+
   has_attached_file :path
   do_not_validate_attachment_file_type :path
 

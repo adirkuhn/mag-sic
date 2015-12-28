@@ -33,9 +33,11 @@ ActiveRecord::Schema.define(version: 201511110214202) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "moot_id"
+    t.integer  "rulling_id"
   end
 
   add_index "attachments", ["moot_id"], name: "index_attachments_on_moot_id"
+  add_index "attachments", ["rulling_id"], name: "index_attachments_on_rulling_id"
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
