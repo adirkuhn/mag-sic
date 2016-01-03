@@ -14,8 +14,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
-@import "libs/nanoscroller";
-@import "compiled/theme_styles";
+@import "./libs/nanoscroller";
+@import "./compiled/theme_styles";
 
 .no_anchor_decoration, a:hover {
     text-decoration: none !important;
