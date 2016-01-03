@@ -1,5 +1,13 @@
-<h1>Nova Pauta</h1>
+<div class="row">
+    <div class="col-lg-6 center">
+        <h1>Nova Pauta</h1>
+        <div class="main-box">
+            <div class="main-box-header"></div>
+            <div class="main-box-body clearfix">
+                <%= render 'form' %>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', [@rulling.moot.company, @rulling.moot] %>
+                <%= link_to 'Voltar', [@rulling.moot.company, @rulling.moot] %>
+            </div>
+        </div>
+    </div>
+</div>

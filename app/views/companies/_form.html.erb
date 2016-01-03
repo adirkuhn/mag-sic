@@ -11,24 +11,24 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, autofocus: true  %>
+  <div class="form-group">
+    <%= f.label "Nome da empresa" %><br>
+    <%= f.text_field :name, autofocus: true, class: 'form-control'  %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :site %><br>
-    <%= f.text_field :site %>
+    <%= f.text_field :site, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :cnpj %><br>
-    <%= f.text_field :cnpj %>
+    <%= f.text_field :cnpj, class: 'form-control' %>
   </div>
 
   <br/>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.submit "Salvar", class: 'btn btn-primary' %>
   </div>
 <% end %>

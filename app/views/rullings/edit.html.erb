@@ -1,6 +1,14 @@
-<h1>Editing Rulling</h1>
+<div class="row">
+    <div class="col-lg-6 center">
+        <h1>Editar Pauta</h1>
+        <div class="main-box">
+            <div class="main-box-header"></div>
+            <div class="main-box-body clearfix">
+                <%= render 'form' %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', [@rulling.moot.company, @rulling.moot, @rulling] %> |
-<%= link_to 'Back', [@rulling.moot.company, @rulling.moot] %>
+                <%= link_to 'Ver pauta', [@rulling.moot.company, @rulling.moot, @rulling] %> |
+                <%= link_to 'voltar', [@rulling.moot.company, @rulling.moot] %>
+            </div>
+        </div>
+    </div>
+</div>

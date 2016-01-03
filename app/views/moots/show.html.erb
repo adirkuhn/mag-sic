@@ -53,7 +53,7 @@
       <div class="main-box infographic-box colored red-bg">
         <i class="fa fa-calendar"></i>
         <span class="headline">Encerra em:</span>
-        <span class="value infobox-value2"><%= @moot.voting_start_at.strftime("%d/%m/%Y %H:%M") %></span>
+        <span class="value infobox-value2"><%= @moot.voting_ending_at.strftime("%d/%m/%Y %H:%M") %></span>
         <span class="headline"><a href="#visualizar">Visualizar</a></span>
       </div>
     </div>
@@ -63,6 +63,15 @@
   <hr/>
 
   <h2>Pautas</h2>
+  <div class="row">
+    <a href="<%= new_company_moot_rulling_path(@moot.company, @moot) %>">
+      <div class="col-lg-3 col-sm-6 col-xs-12">
+        <div class="main-box infographic-box colored emerald-bg">
+          <span>+ Nova Pauta</span>
+        </div>
+      </div>
+    </a>
+  </div>
   <div class="row">
     <% @moot.rullings.each do |rulling| %>
     <div class="col-lg-4 col-md-6 col-sm-6">

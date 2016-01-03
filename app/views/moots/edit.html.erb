@@ -1,6 +1,14 @@
-<h1>Editing Moot</h1>
+<div class="row">
+    <div class="col-lg-6 center">
+        <h1>Editar Assembléia</h1>
+        <div class="main-box">
+            <div class="main-box-header"></div>
+            <div class="main-box-body clearfix">
+                <%= render 'form' %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', [@moot.company, @moot] %> |
-<%= link_to 'Back', @moot.company %>
+                <%= link_to 'Ver Assembléia', [@moot.company, @moot] %> |
+                <%= link_to 'Voltar', @moot.company %>
+            </div>
+        </div>
+    </div>
+</div>
