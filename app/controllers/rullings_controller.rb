@@ -1,4 +1,7 @@
 class RullingsController < ApplicationController
+
+  layout 'admin-application'
+
   before_action :set_rulling, only: [:show, :edit, :update, :destroy]
   before_action :find_moot, only: [:new, :create]
 

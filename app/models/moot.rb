@@ -7,4 +7,7 @@ class Moot < ActiveRecord::Base
 
   #rulings
   has_many :rullings
+
+  #comments
+  has_many :moot_comments
 end

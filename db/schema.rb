@@ -33,9 +33,11 @@ ActiveRecord::Schema.define(version: 201511110214202) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "moot_id"
+    t.integer  "rulling_id"
   end
 
   add_index "attachments", ["moot_id"], name: "index_attachments_on_moot_id"
+  add_index "attachments", ["rulling_id"], name: "index_attachments_on_rulling_id"
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -70,6 +72,17 @@ ActiveRecord::Schema.define(version: 201511110214202) do
 
   add_index "company_voters", ["user_id", "company_id"], name: "index_company_voters_on_user_id_and_company_id", unique: true
 
+  create_table "moot_comments", force: :cascade do |t|
+    t.text     "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "moot_id"
+  end
+
+  add_index "moot_comments", ["moot_id"], name: "index_moot_comments_on_moot_id"
+  add_index "moot_comments", ["user_id"], name: "index_moot_comments_on_user_id"
+
   create_table "moots", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -90,6 +103,17 @@ ActiveRecord::Schema.define(version: 201511110214202) do
     t.datetime "updated_at",        null: false
   end
 
+  create_table "rulling_comments", force: :cascade do |t|
+    t.text     "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "rulling_id"
+  end
+
+  add_index "rulling_comments", ["rulling_id"], name: "index_rulling_comments_on_rulling_id"
+  add_index "rulling_comments", ["user_id"], name: "index_rulling_comments_on_user_id"
+
   create_table "rullings", force: :cascade do |t|
     t.string   "title"
     t.string   "objective"
@@ -100,6 +124,12 @@ ActiveRecord::Schema.define(version: 201511110214202) do
   end
 
   add_index "rullings", ["moot_id"], name: "index_rullings_on_moot_id"
+
+  create_table "security_questions", force: :cascade do |t|
+    t.text     "question"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                             default: "", null: false
@@ -117,11 +147,20 @@ ActiveRecord::Schema.define(version: 201511110214202) do
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
     t.string   "cpf",                    limit: 11
+    t.integer  "securityQuestion1_id"
+    t.integer  "securityQuestion2_id"
+    t.integer  "securityQuestion3_id"
+    t.string   "securityAnswer1"
+    t.string   "securityAnswer2"
+    t.string   "securityAnswer3"
   end
 
   add_index "users", ["cpf"], name: "index_users_on_cpf", unique: true
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["securityQuestion1_id"], name: "index_users_on_securityQuestion1_id"
+  add_index "users", ["securityQuestion2_id"], name: "index_users_on_securityQuestion2_id"
+  add_index "users", ["securityQuestion3_id"], name: "index_users_on_securityQuestion3_id"
 
   create_table "voter_invites", force: :cascade do |t|
     t.string   "token"

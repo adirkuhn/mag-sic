@@ -1,39 +1,71 @@
-<h2>Sign up</h2>
+<div class="col-xs-12">
+  <div id="login-box">
+    <div class="row">
+      <div class="col-xs-12">
+        <header id="login-header">
+          <div id="login-logo">
+            <p>Registro</p>
+          </div>
+        </header>
+  
+        <div id="login-box-inner">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+              <%= f.text_field :cpf, placeholder: "CPF", class: "form-control", autofocus: true, maxlength: 11 %>
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+              <%= f.text_field :name, placeholder: "Nome completo", class: "form-control" %>
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+              <%= f.email_field :email, placeholder: "Email", class: "form-control" %>
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+              <%= f.password_field :password, autocomplete: "off", placeholder: "Senha", class: "form-control" %>
+              <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> letras no mínimo)</em>
+              <% end %><br />
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+              <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Confirmar senha", class: "form-control" %>
+            </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+              <%= f.select :securityQuestion1_id, options_from_collection_for_select(@securityQuestions, :id, :question), {:prompt => 'Pergunta de segurança'}, {required: 'true', class: "form-control"} %>
+            </div>
 
-  <div class="field">
-    <%= f.label :cpf %><br />
-    <%= f.text_field :cpf, autofocus: true %>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+              <%= f.text_field :securityAnswer1, placeholder: "Resposta de segurança", class: "form-control" %>
+            </div>
+
+            <div id="remember-me-wrapper">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="checkbox-nice">
+                    <input type="checkbox" id="terms-cond" checked="checked">
+                      <label for="terms-cond">
+                        Eu aceito os termos e condições.
+                      </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col-xs-12">
+                <button type="submit" class="btn btn-success col-xs-12">Register</button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>

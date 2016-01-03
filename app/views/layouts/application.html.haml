@@ -1,29 +1,32 @@
 !!! 5
 %html
-%head
-  %title Assembleia :: ADMIN
-  = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-  = javascript_include_tag 'application', 'data-turbolinks-track' => true
-  = csrf_meta_tags
-%body
-  %nav.navbar.navbar-default
+  %head
+    %title Assembleia :: ADMIN
+    = stylesheet_link_tag    'application', params[:controller], media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', params[:controller], 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+  %body.theme-whbl.pace-done
+    .theme-wrapper
+      %header#header-navbar.navbar
+        .container
+          = link_to "Assembleias", root_path, class: "navbar-brand"
+
+        .clearfix
+          %ul.nav.navbar-nav.navbar-right
+            - if user_signed_in?
+              %li= link_to "Account", edit_user_registration_path
+              %li= link_to "Sign Out", destroy_user_session_path, method: :delete
+
+    / .container
+    /   - if notice
+    /     %p.alert.alert-info
+    /       = notice
+    /   - if alert
+    /     %p.alert.alert-danger
+    /       = alert
+
+
     .container
-      .navbar-brand= link_to "Assembleias", root_path
-
-      %ul.nav.navbar-nav.navbar-right
-        - if user_signed_in?
-          %li= link_to "Account", edit_user_registration_path
-          %li= link_to "Sign Out", destroy_user_session_path, method: :delete
-
-  .container
-    - if notice
-      %p.alert.alert-info
-        = notice
-    - if alert
-      %p.alert.alert-danger
-        = alert
-
-
-  .container
-    .container-fluid
-      = yield
+      .container-fluid
+        = yield

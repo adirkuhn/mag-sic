@@ -13,6 +13,10 @@ class User < ActiveRecord::Base
   has_many :company_voters
   has_many :companies_to_vote, through: :company_voters, :source => :company
 
+  #comments
+  has_many :moot_comments
+  has_many :rulling_comments
+
   validates_length_of :cpf, :minimum => 11, :maximum => 11, :allow_blank => false
 
   #Login com CPF ou email
