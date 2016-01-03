@@ -21,7 +21,7 @@
               <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                  <%= f.text_field :login, autofocus: true, class: "form-control", placeholder: "CPF ou email" %>
+                  <%= f.text_field :login, autofocus: true, class: "form-control", placeholder: "CPF ou email", maxlength: 11 %>
                 </div>
 
                 <div class="input-group">

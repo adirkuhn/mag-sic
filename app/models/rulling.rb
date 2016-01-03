@@ -3,4 +3,7 @@ class Rulling < ActiveRecord::Base
 
   #attachments
   has_many :attachments
+
+  #comments
+  has_many :rulling_comments
 end

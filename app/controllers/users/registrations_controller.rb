@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
+  layout 'admin-application', only: [:edit]
 
   # GET /resource/sign_up
   def new
@@ -55,17 +56,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       set_minimum_password_length
 
-      # if session[:plan_id]
-      #   @plan = Plan.find(session[:plan_id])
-      #   render 'buy'
-      # else
-      #   respond_with resource
-      # end
+      @securityQuestions = SecurityQuestion.all
 
       respond_with resource
     end
   end
-
 
   private
 
@@ -112,7 +107,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # # GET /resource/edit
   # def edit
-  #   render 'edit'
+  #   # layout 'admin-application'
+
+  #   byebug
+  #   render 'editsadasd'
   # end
 
   # # PUT /resource

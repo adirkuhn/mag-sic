@@ -32,106 +32,43 @@
 
             <div class="conversation-wrapper">
               <div class="conversation-content">
-                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 340px;"><div class="conversation-inner" style="overflow: hidden; width: auto; height: 340px;">
-                  <div class="conversation-item item-left clearfix">
-                    <div class="conversation-user">
-                      <img src="img/samples/ryan.png" alt="">
+                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 340px;">
+                  <div class="conversation-inner" style="overflow: hidden; width: auto; height: 340px;">
+                    <% @rulling.rulling_comments.each do |comment| %>
+                    <div class="conversation-item item-left clearfix">
+                      <div class="conversation-user">
+                        <img src="http://lorempixel.com/50/50/" alt="">
+                      </div>
+                      <div class="conversation-body">
+                        <div class="name">
+                          <%= comment.user.name %>
+                        </div>
+                        <div class="time hidden-xs">
+                          <%= comment.created_at.strftime('%d/%m/%Y %H:%M') %>
+                        </div>
+                        <div class="text">
+                          <%= comment.comment %>
+                        </div>
+                      </div>
                     </div>
-                    <div class="conversation-body">
-                      <div class="name">
-                        Ryan Gossling
-                      </div>
-                      <div class="time hidden-xs">
-                        September 21, 2013 18:28
-                      </div>
-                      <div class="text">
-                        I don't think they tried to market it to the billionaire, spelunking,
-                        base-jumping crowd.
-                      </div>
-                    </div>
+                    <% end %>
                   </div>
-                  <div class="conversation-item item-right clearfix">
-                    <div class="conversation-user">
-                      <img src="img/samples/kunis.png" alt="">
-                    </div>
-                    <div class="conversation-body">
-                      <div class="name">
-                        Mila Kunis
-                      </div>
-                      <div class="time hidden-xs">
-                        September 21, 2013 12:45
-                      </div>
-                      <div class="text">
-                        Normally, both your asses would be dead as fucking fried chicken, but you
-                        happen to pull this shit while I'm in a transitional period so I don't wanna
-                        kill you, I wanna help you.
-                      </div>
-                    </div>
+                  <div class="slimScrollBar" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 288.279px; background: rgb(0, 0, 0);">
                   </div>
-                  <div class="conversation-item item-right clearfix">
-                    <div class="conversation-user">
-                      <img src="img/samples/kunis.png" alt="">
-                    </div>
-                    <div class="conversation-body">
-                      <div class="name">
-                        Mila Kunis
-                      </div>
-                      <div class="time hidden-xs">
-                        September 21, 2013 12:45
-                      </div>
-                      <div class="text">
-                        Normally, both your asses would be dead as fucking fried chicken, but you
-                        happen to pull this shit while I'm in a transitional period so I don't wanna
-                        kill you, I wanna help you.
-                      </div>
-                    </div>
+                  <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);">
+
                   </div>
-                  <div class="conversation-item item-left clearfix">
-                    <div class="conversation-user">
-                      <img src="img/samples/ryan.png" alt="">
-                    </div>
-                    <div class="conversation-body">
-                      <div class="name">
-                        Ryan Gossling
-                      </div>
-                      <div class="time hidden-xs">
-                        September 21, 2013 18:28
-                      </div>
-                      <div class="text">
-                        I don't think they tried to market it to the billionaire, spelunking,
-                        base-jumping crowd.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="conversation-item item-right clearfix">
-                    <div class="conversation-user">
-                      <img src="img/samples/kunis.png" alt="">
-                    </div>
-                    <div class="conversation-body">
-                      <div class="name">
-                        Mila Kunis
-                      </div>
-                      <div class="time hidden-xs">
-                        September 21, 2013 12:45
-                      </div>
-                      <div class="text">
-                        Normally, both your asses would be dead as fucking fried chicken, but you
-                        happen to pull this shit while I'm in a transitional period so I don't wanna
-                        kill you, I wanna help you.
-                      </div>
-                    </div>
-                  </div>
-                </div><div class="slimScrollBar" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 288.279px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+                </div>
               </div>
               <div class="conversation-new-message">
-                <form>
+                <%= form_for [@rulling.moot.company, @rulling.moot, @rulling, @rulling.rulling_comments.new] do |f| %>
                   <div class="form-group">
-                  <textarea class="form-control" rows="2" placeholder="Digite seu comentário..."></textarea>
+                    <%= f.text_area :comment, class: 'form-control', rows: 2, placeholder: 'Digite seu comentário...'  %>
                   </div>
                   <div class="clearfix">
-                    <button type="submit" class="btn btn-success pull-right">Enviar comentário</button>
+                    <%= f.submit 'Enviar comentário', class: 'btn btn-success pull-right' %>
                   </div>
-                </form>
+                <% end %>
               </div>
             </div>
 
@@ -139,25 +76,25 @@
 
           <div class="tab-pane fade" id="tab-anexos">
             <div>
-                <%= form_for @rulling.attachments.new, html: { multipart: true } do |f| %>
-                  <%= f.label :attachments, "Adicionar novo anexo" %>
-                  <%= file_field_tag "path[]", type: :file, multiple: true %>
-                  <%= f.hidden_field :rulling, :value => @rulling.id %>
-                  <%= f.submit "Salvar", class: 'btn btn-primary' %>
-                <% end %>
-                <script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="bar" style="width: 0%"></div></div></div></script>
+              <%= form_for @rulling.attachments.new, html: { multipart: true } do |f| %>
+              <%= f.label :attachments, "Adicionar novo anexo" %>
+              <%= file_field_tag "path[]", type: :file, multiple: true %>
+              <%= f.hidden_field :rulling, :value => @rulling.id %>
+              <%= f.submit "Salvar", class: 'btn btn-primary' %>
+              <% end %>
+              <script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="bar" style="width: 0%"></div></div></div></script>
             </div>
             <h3>Anexos</h3>
             <div>
-                <% if @rulling.attachments.empty? %>
-                  sem anexos
-                <% else %>
-                  <ul>
-                    <% @rulling.attachments.each do |att| %>
-                      <li> <%= link_to File.basename(att.path.to_s), att.path.url %> </li>
-                    <% end %>
-                  </ul>
+              <% if @rulling.attachments.empty? %>
+              sem anexos
+              <% else %>
+              <ul>
+                <% @rulling.attachments.each do |att| %>
+                <li> <%= link_to File.basename(att.path.to_s), att.path.url %> </li>
                 <% end %>
+              </ul>
+              <% end %>
             </div>
           </div>
 

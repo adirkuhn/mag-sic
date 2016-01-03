@@ -13,7 +13,7 @@
             <%= devise_error_messages! %>
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
-              <%= f.text_field :cpf, placeholder: "CPF", class: "form-control", autofocus: true %>
+              <%= f.text_field :cpf, placeholder: "CPF", class: "form-control", autofocus: true, maxlength: 11 %>
             </div>
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -37,9 +37,14 @@
 
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
-              <%= f.select :securityQuestion1, options_from_collection_for_select(@securityQuestions, :id, :question), {:prompt => 'Pergunta de segurança'}, {required: 'true', class: "form-control"} %>
+              <%= f.select :securityQuestion1_id, options_from_collection_for_select(@securityQuestions, :id, :question), {:prompt => 'Pergunta de segurança'}, {required: 'true', class: "form-control"} %>
             </div>
-      
+
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+              <%= f.text_field :securityAnswer1, placeholder: "Resposta de segurança", class: "form-control" %>
+            </div>
+
             <div id="remember-me-wrapper">
               <div class="row">
                 <div class="col-xs-12">

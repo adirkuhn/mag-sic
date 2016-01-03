@@ -1,0 +1,2 @@
+module MootCommentHelper
+end

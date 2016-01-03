@@ -3,12 +3,17 @@ Rails.application.routes.draw do
 
   resources :companies do
     resources :moots do #, shallow: true
-      resources :rullings
+      resources :rullings do
+        resources :rulling_comments
+      end
+      resource :moot_comments
     end
   end
   devise_for :users, controllers: { registrations: "users/registrations" }
   #resources :moots
   resources :plans
+
+  # resource :moot_comments
 
   resource :attachments
 

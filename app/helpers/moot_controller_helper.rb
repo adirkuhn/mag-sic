@@ -1,0 +1,2 @@
+module MootControllerHelper
+end
