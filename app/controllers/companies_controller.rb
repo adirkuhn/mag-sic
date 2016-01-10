@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:show, :edit, :update, :destroy, :plans, :chooseplan, 
+  before_action :set_company, only: [:show, :edit, :update, :destroy, :plans, :chooseplan,
     :admins, :admins_save, :voters, :voters_save]
 
   before_action :authenticate_user!
@@ -106,6 +106,7 @@ class CompaniesController < ApplicationController
       adminInvite.user = current_user #invited by
 
       if adminInvite.save
+        AdminInviteMailer.convite(adminInvite).deliver_now
         redirect_to @company
       end
 
@@ -145,6 +146,7 @@ class CompaniesController < ApplicationController
       voterInvite.user = current_user #invited by
 
       if voterInvite.save
+        VoterInviteMailer.convite(voterInvite).deliver_now
         redirect_to @company
       end
 
