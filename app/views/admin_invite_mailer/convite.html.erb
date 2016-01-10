@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Venha para assembleias</h1>
+    <p>
+      Você foi convidado por <%= @admin_invite.user.name %>
+      para se cadastrar na assembleia da empresa <%= @admin_invite.company.name %>.<br>
+    </p>
+    <p>
+      Para se cadastrar acesse o endereço: <a href="<%= @url %>"><%= @url %></a>
+    </p>
+    <p>Obrigado e tenha um bom dia!</p>
+  </body>
+</html>
