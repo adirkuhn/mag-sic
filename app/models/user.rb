@@ -5,13 +5,18 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:login]
 
-  #admins
-  has_many :company_admins
-  has_many :companies, through: :company_admins
+  #members
+  has_many :company_members
+  has_many :companies, through: :company_members, :source => :company
+  accepts_nested_attributes_for :companies
 
-  #eleitores
-  has_many :company_voters
-  has_many :companies_to_vote, through: :company_voters, :source => :company
+  # #admins
+  # has_many :company_admins
+  # has_many :companies, through: :company_admins
+
+  # #eleitores
+  # has_many :company_voters
+  # has_many :companies_to_vote, through: :company_voters, :source => :company
 
   #comments
   has_many :moot_comments
