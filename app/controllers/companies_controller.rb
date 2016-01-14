@@ -1,8 +1,11 @@
 class CompaniesController < ApplicationController
+  before_action :authenticate_user!
+
   before_action :set_company, only: [:show, :edit, :update, :destroy, :plans, :chooseplan,
     :admins, :admins_save, :voters, :voters_save]
 
-  before_action :authenticate_user!
+  before_action :for_admins, except: [:index, :show]
+  before_action :for_members, only: [:show]
 
   layout 'admin-application'
 
@@ -173,5 +176,17 @@ class CompaniesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
       params.require(:company).permit(:name, :site, :cnpj, :email, :cpf)
+    end
+
+    def for_admins
+      unless @company.is_admin(current_user)
+        head :forbidden
+      end
+    end
+
+    def for_members
+      unless @company.is_member(current_user)
+        head :forbidden
+      end
     end
 end

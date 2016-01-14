@@ -27,7 +27,6 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-
   #company plans
   get 'companies/:id/plans', to: 'companies#plans', as: 'companies_plans'
   get 'companies/:id/plans/:id_plan', to: 'companies#chooseplan', as: 'companies_chooseplan'

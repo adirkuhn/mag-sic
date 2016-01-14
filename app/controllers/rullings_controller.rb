@@ -1,14 +1,18 @@
 class RullingsController < ApplicationController
+  before_action :authenticate_user!
 
   layout 'admin-application'
 
   before_action :set_rulling, only: [:show, :edit, :update, :destroy]
-  before_action :find_moot, only: [:new, :create]
+  before_action :find_moot, only: [:new, :create, :index]
+
+  before_action :for_admins, except: [:index, :show]
+  before_action :for_members, only: [:show, :index]
 
   # GET /rullings
   # GET /rullings.json
   def index
-    @rullings = Rulling.all
+    @rullings = @moot.rullings
   end
 
   # GET /rullings/1
@@ -78,5 +82,23 @@ class RullingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def rulling_params
       params.require(:rulling).permit(:title, :objective, :description)
+    end
+
+    def for_admins
+      if @rulling
+        unless @rulling.moot.company.is_admin(current_user)
+          head :forbidden
+        end
+      else
+        unless @moot.company.is_admin(current_user)
+          head :forbidden
+        end
+      end
+    end
+
+    def for_members
+      unless @rulling.moot.company.is_member(current_user)
+        head :forbidden
+      end
     end
 end

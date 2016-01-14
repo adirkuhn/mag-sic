@@ -75,11 +75,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     invitedAdmin = AdminInvite.where(:token => session[:admin_token]).first
 
     if invitedAdmin && invitedAdmin.email == user.email
-      companyAdmin = CompanyAdmin.new
-      companyAdmin.company = invitedAdmin.company
-      companyAdmin.user = user
+      member = CompanyMember.new
+      member.company = invitedAdmin.company
+      member.user = user
+      member.isAdmin = true
 
-      companyAdmin.save
+      member.save
     end
 
     session.delete(:admin_token)
@@ -90,11 +91,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     invitedVoter = VoterInvite.where(:token => session[:voter_token]).first
 
     if invitedVoter && invitedVoter.email == user.email
-      companyVoter = CompanyVoter.new
-      companyVoter.company = invitedVoter.company
-      companyVoter.user = user
+      member = CompanyMember.new
+      member.company = invitedVoter.company
+      member.user = user
+      member.isAdmin = false
 
-      companyVoter.save
+      member.save
     end
 
     session.delete(:voter_token)

@@ -3,6 +3,6 @@ class CompanyMember < ActiveRecord::Base
   belongs_to :company
 
   def self.admin
-    where(:isAdmin => 1)
+    where(:isAdmin => true)
   end
 end

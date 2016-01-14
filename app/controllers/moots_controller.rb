@@ -1,9 +1,13 @@
 class MootsController < ApplicationController
+  before_action :authenticate_user!
 
   layout 'admin-application'
 
   before_action :set_moot, only: [:show, :edit, :update, :destroy]
   before_action :find_company, only: [:new, :create]
+
+  before_action :for_admins, except: [:index, :show]
+  before_action :for_members, only: [:show]
 
   # GET /moots
   # GET /moots.json
@@ -79,5 +83,23 @@ class MootsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def moot_params
       params.require(:moot).permit(:title, :description, :voting_start_at, :voting_ending_at)
+    end
+
+    def for_admins
+      if @moot
+        unless @moot.company.is_admin(current_user)
+          head :forbidden
+        end
+      else
+        unless @company.is_admin(current_user)
+          head :forbidden
+        end
+      end
+    end
+
+    def for_members
+      unless @moot.company.is_member(current_user)
+        head :forbidden
+      end
     end
 end
