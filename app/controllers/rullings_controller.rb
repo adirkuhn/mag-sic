@@ -97,8 +97,14 @@ class RullingsController < ApplicationController
     end
 
     def for_members
-      unless @rulling.moot.company.is_member(current_user)
-        head :forbidden
+      if @rulling
+        unless @rulling.moot.company.is_member(current_user)
+          head :forbidden
+        end
+      else
+        unless @moot.company.is_member(current_user)
+          head :forbidden
+        end
       end
     end
 end
