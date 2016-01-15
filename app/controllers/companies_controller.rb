@@ -4,7 +4,7 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy, :plans, :chooseplan,
     :admins, :admins_save, :voters, :voters_save]
 
-  before_action :for_admins, except: [:index, :show]
+  before_action :for_admins, except: [:index, :show, :create, :new]
   before_action :for_members, only: [:show]
 
   layout 'admin-application'
