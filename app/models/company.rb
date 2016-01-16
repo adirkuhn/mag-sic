@@ -24,6 +24,18 @@ class Company < ActiveRecord::Base
     end
   end
 
+  def admin_add(user)
+    user.update_attributes :isAdmin => true
+  end
+
+  def admin_delete(user)
+    user.update_attributes :isAdmin => false
+  end
+
+  def all_members
+    User.find_by_sql ["SELECT DISTINCT u.id, u.name, u.created_at, u.cpf, cm.isAdmin FROM users u JOIN company_members cm ON cm.user_id = u.id WHERE cm.company_id = ?", self.id]
+  end
+
   def is_admin(user)
     self.company_members.admin.where(:user_id => user.id).count == 1
   end

@@ -2,10 +2,14 @@ class CompaniesController < ApplicationController
   before_action :authenticate_user!
 
   before_action :set_company, only: [:show, :edit, :update, :destroy, :plans, :chooseplan,
-    :admins, :admins_save, :voters, :voters_save]
+    :admins, :admins_save, :voters, :voters_save, :members, :admin_add, :admin_delete]
 
   before_action :for_admins, except: [:index, :show, :create, :new]
-  before_action :for_members, only: [:show]
+  before_action :for_members, only: [:show, :members]
+
+  skip_before_filter :verify_authenticity_token, :only => [
+    :admin_add, :admin_delete, :admins_save, :voters_save
+  ]
 
   layout 'admin-application'
 
@@ -111,7 +115,10 @@ class CompaniesController < ApplicationController
 
       if adminInvite.save
         AdminInviteMailer.convite(adminInvite).deliver_now
-        redirect_to @company
+        respond_to do |format|
+          format.html { redirect_to @company }
+          format.json { render json: "ok" }
+        end
       end
 
     else
@@ -121,7 +128,10 @@ class CompaniesController < ApplicationController
       companyAdmin.company = @company
 
       if companyAdmin.save
-        redirect_to @company
+        respond_to do |format|
+          format.html { redirect_to @company }
+          format.json { render json: "ok" }
+        end
       end
     end
 
@@ -151,7 +161,10 @@ class CompaniesController < ApplicationController
 
       if voterInvite.save
         VoterInviteMailer.convite(voterInvite).deliver_now
-        redirect_to @company
+        respond_to do |format|
+          format.html { redirect_to @company }
+          format.json { render json: "ok" }
+        end
       end
 
     else
@@ -161,10 +174,37 @@ class CompaniesController < ApplicationController
       companyVoter.company = @company
 
       if companyVoter.save
-        redirect_to @company
+        respond_to do |format|
+          format.html { redirect_to @company }
+          format.json { render json: "ok" }
+        end
       end
     end
 
+  end
+
+  def members
+    render json: @company.all_members
+  end
+
+  def admin_add
+    user = @company.company_members.find_by_user_id(params[:user_id])
+    if user
+      @company.admin_add(user)
+      return render json: "ok"
+    end
+
+    return render json: "fail", :status => 404
+  end
+
+  def admin_delete
+    user = @company.company_members.find_by_user_id(params[:user_id])
+    if user
+      @company.admin_delete(user)
+      return render json: "ok"
+    end
+
+    return render json: "fail", :status => 404
   end
 
   private

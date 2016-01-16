@@ -38,4 +38,11 @@ Rails.application.routes.draw do
   get 'companies/:id/voters', to: 'companies#voters', as: 'companies_voters'
   post 'companies/:id/voters', to: 'companies#voters_save', as: 'companies_voters_save'
 
+  #list company members
+  get 'companies/:id/members', to: 'companies#members', as: 'companies_members'
+
+  #add and delete admin
+  post 'companies/:id/admin/add', to: 'companies#admin_add', as: 'companies_admin_add'
+  post 'companies/:id/admin/delete', to: 'companies#admin_delete', as: 'companies_admin_delete'
+
 end
