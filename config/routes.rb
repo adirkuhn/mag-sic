@@ -45,4 +45,9 @@ Rails.application.routes.draw do
   post 'companies/:id/admin/add', to: 'companies#admin_add', as: 'companies_admin_add'
   post 'companies/:id/admin/delete', to: 'companies#admin_delete', as: 'companies_admin_delete'
 
+  #invited user to a moot
+  get '/companies/:company_id/moots/:id/invited_users', to: 'moots#invited_users', as: 'invited_users'
+  post '/companies/:company_id/moots/:id/invited_users/add', to: 'moots#add_invited_users', as: 'add_invited_users'
+  post '/companies/:company_id/moots/:id/invited_users/delete', to: 'moots#delete_invited_users', as: 'delete_invited_users'
+
 end

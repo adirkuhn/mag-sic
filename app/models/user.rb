@@ -10,13 +10,9 @@ class User < ActiveRecord::Base
   has_many :companies, through: :company_members, :source => :company
   accepts_nested_attributes_for :companies
 
-  # #admins
-  # has_many :company_admins
-  # has_many :companies, through: :company_admins
-
-  # #eleitores
-  # has_many :company_voters
-  # has_many :companies_to_vote, through: :company_voters, :source => :company
+  #moot that user can vote
+  has_many :moot_voters
+  has_many :moots_can_vote, through: :moot_voters, :source => :moot
 
   #comments
   has_many :moot_comments

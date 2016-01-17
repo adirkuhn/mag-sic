@@ -3,11 +3,17 @@ class MootsController < ApplicationController
 
   layout 'admin-application'
 
-  before_action :set_moot, only: [:show, :edit, :update, :destroy]
+  before_action :set_moot, only: [
+    :show, :edit, :update, :destroy, :invited_users, :add_invited_users, :delete_invited_users
+  ]
   before_action :find_company, only: [:new, :create]
 
   before_action :for_admins, except: [:index, :show]
-  before_action :for_members, only: [:show]
+  before_action :for_members, only: [:index, :show]
+
+  skip_before_filter :verify_authenticity_token, :only => [
+    :add_invited_users, :delete_invited_users
+  ]
 
   # GET /moots
   # GET /moots.json
@@ -68,6 +74,29 @@ class MootsController < ApplicationController
       format.html { redirect_to [company], notice: 'Moot was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  #invited users to this moot
+  def invited_users
+    render json: @moot.list_users_can_vote
+  end
+
+  def add_invited_users
+    user = @moot.company.members.find(params[:user_id])
+    if user && @moot.add_user_can_vote(user)
+      return render json: "ok"
+    end
+
+    return render json: "fail", status: 404
+  end
+
+  def delete_invited_users
+    user = @moot.company.members.find(params[:user_id])
+    if user && @moot.delete_user_can_vote(user)
+      return render json: "ok"
+    end
+
+    return render json: "fail", status: 404
   end
 
   private
