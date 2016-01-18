@@ -3,7 +3,7 @@ class RullingsController < ApplicationController
 
   layout 'admin-application'
 
-  before_action :set_rulling, only: [:show, :edit, :update, :destroy, :vote, :vote_status]
+  before_action :set_rulling, only: [:show, :edit, :update, :destroy, :vote, :vote_status, :all_vote_status]
   before_action :find_moot, only: [:new, :create, :index]
 
   before_action :for_admins, except: [:index, :show, :vote]
@@ -115,6 +115,10 @@ class RullingsController < ApplicationController
     end
 
     return render json: "erro", :status => 400
+  end
+
+  def all_vote_status
+    return render json: @rulling.rulling_votes
   end
 
   private

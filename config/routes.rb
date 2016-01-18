@@ -53,5 +53,6 @@ Rails.application.routes.draw do
   #vote rulling
   post '/companies/:company_id/moots/:moot_id/rullings/:id/vote', to: 'rullings#vote', as: 'rulling_vote'
   get '/companies/:company_id/moots/:moot_id/rullings/:id/votestatus', to: 'rullings#vote_status', as: 'rulling_vote_status'
+  get '/companies/:company_id/moots/:moot_id/rullings/:id/allvotestatus', to: 'rullings#all_vote_status', as: 'rulling_all_vote_status'
 
 end
