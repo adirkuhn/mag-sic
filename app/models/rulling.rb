@@ -6,4 +6,7 @@ class Rulling < ActiveRecord::Base
 
   #comments
   has_many :rulling_comments
+
+  #votes
+  has_many :rulling_votes
 end

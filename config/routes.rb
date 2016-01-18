@@ -50,4 +50,8 @@ Rails.application.routes.draw do
   post '/companies/:company_id/moots/:id/invited_users/add', to: 'moots#add_invited_users', as: 'add_invited_users'
   post '/companies/:company_id/moots/:id/invited_users/delete', to: 'moots#delete_invited_users', as: 'delete_invited_users'
 
+  #vote rulling
+  post '/companies/:company_id/moots/:moot_id/rullings/:id/vote', to: 'rullings#vote', as: 'rulling_vote'
+  get '/companies/:company_id/moots/:moot_id/rullings/:id/votestatus', to: 'rullings#vote_status', as: 'rulling_vote_status'
+
 end

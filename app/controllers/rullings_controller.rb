@@ -3,11 +3,13 @@ class RullingsController < ApplicationController
 
   layout 'admin-application'
 
-  before_action :set_rulling, only: [:show, :edit, :update, :destroy]
+  before_action :set_rulling, only: [:show, :edit, :update, :destroy, :vote, :vote_status]
   before_action :find_moot, only: [:new, :create, :index]
 
-  before_action :for_admins, except: [:index, :show]
-  before_action :for_members, only: [:show, :index]
+  before_action :for_admins, except: [:index, :show, :vote]
+  before_action :for_members, only: [:show, :index, :vote]
+
+  skip_before_filter :verify_authenticity_token, :only => [:vote, :vote_status]
 
   # GET /rullings
   # GET /rullings.json
@@ -67,6 +69,52 @@ class RullingsController < ApplicationController
       format.html { redirect_to rullings_url, notice: 'Rulling was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def vote
+    if params[:vote] && ( params[:vote] == 's' || params[:vote] == 'n')
+      if (@rulling.moot.user_can_vote?(current_user))
+
+        rulling_vote = @rulling.rulling_votes.find_by_user_id_and_rulling_id(current_user, @rulling)
+        if rulling_vote && rulling_vote.update(:vote => params[:vote])
+          return render json: "ok"
+        end
+
+        rulling_vote = @rulling.rulling_votes.build
+        rulling_vote.user = current_user
+        rulling_vote.vote = params[:vote]
+
+        if rulling_vote.save
+          return render json: "ok"
+        end
+      end
+    end
+
+    return head 400
+  end
+
+  def vote_status
+
+    unless params[:user_id]
+      return head 400
+    end
+
+    user = @rulling.moot.company.members.find(params[:user_id])
+
+    if user
+      rulling_vote = @rulling.rulling_votes.find_by_user_id_and_rulling_id(user, @rulling)
+      if rulling_vote
+        if rulling_vote.vote == 's'
+          return render json: "voto a favor"
+        end
+
+        return render json: "voto contra"
+      end
+
+      return render json: "sem voto para pauta"
+    end
+
+    return render json: "erro", :status => 400
   end
 
   private

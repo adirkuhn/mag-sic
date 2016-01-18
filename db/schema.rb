@@ -113,6 +113,16 @@ ActiveRecord::Schema.define(version: 201511110214202) do
   add_index "rulling_comments", ["rulling_id"], name: "index_rulling_comments_on_rulling_id"
   add_index "rulling_comments", ["user_id"], name: "index_rulling_comments_on_user_id"
 
+  create_table "rulling_votes", force: :cascade do |t|
+    t.string   "vote",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "rulling_id"
+  end
+
+  add_index "rulling_votes", ["user_id", "rulling_id"], name: "index_rulling_votes_on_user_id_and_rulling_id", unique: true
+
   create_table "rullings", force: :cascade do |t|
     t.string   "title"
     t.string   "objective"
