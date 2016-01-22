@@ -6,7 +6,7 @@ class MootsController < ApplicationController
   before_action :set_moot, only: [
     :show, :edit, :update, :destroy, :invited_users, :add_invited_users, :delete_invited_users
   ]
-  before_action :find_company, only: [:new, :create]
+  before_action :find_company, only: [:index, :new, :create]
 
   before_action :for_admins, except: [:index, :show]
   before_action :for_members, only: [:index, :show]
@@ -18,7 +18,7 @@ class MootsController < ApplicationController
   # GET /moots
   # GET /moots.json
   def index
-    @moots = Moot.all
+    @moots = @company.moots
   end
 
   # GET /moots/1
@@ -127,8 +127,14 @@ class MootsController < ApplicationController
     end
 
     def for_members
-      unless @moot.company.is_member(current_user)
-        head :forbidden
+      if @moot
+        unless @moot.company.is_member(current_user)
+          head :forbidden
+        end
+      else
+        unless @company.is_member(current_user)
+          head :forbidden
+        end
       end
     end
 end
