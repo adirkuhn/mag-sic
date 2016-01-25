@@ -1,7 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  question: MyText
+  question: "Qual o nome do seu primeiro animal de estimação?"
 
 two:
-  question: MyText
+  question: "Qual o nome da sua primeira professora?"
+
+three:
+  question: "Qual o número do seu passaporte?"
+
+four:
+  question: "Qual o nome da cidade em que você nasceu?"
+
+five:
+  question: "Qual seu apelido de infância?"
