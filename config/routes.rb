@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resource :moot_comments
     end
   end
-  devise_for :users, controllers: { registrations: "users/registrations" }
+  devise_for :users, controllers: { registrations: "users/registrations", sessions: "users/sessions" }
   #resources :moots
   resources :plans
 
@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   #list company members
   get 'companies/:id/members', to: 'companies#members', as: 'companies_members'
+  get 'companies/:id/members_admins', to: 'companies#members_admins', as: 'companies_members_admins'
 
   #add and delete admin
   post 'companies/:id/admin/add', to: 'companies#admin_add', as: 'companies_admin_add'
