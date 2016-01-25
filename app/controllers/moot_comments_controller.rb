@@ -7,6 +7,7 @@ class MootCommentsController < ApplicationController
 
   def show
     @comments = @moot.moot_comments
+    return render json: @comments
   end
 
   def new

@@ -2,9 +2,9 @@ class CompaniesController < ApplicationController
   before_action :authenticate_user!
 
   before_action :set_company, only: [:show, :edit, :update, :destroy, :plans, :chooseplan,
-    :admins, :admins_save, :voters, :voters_save, :members, :admin_add, :admin_delete]
+    :admins, :admins_save, :voters, :voters_save, :members, :members_admins, :admin_add, :admin_delete]
 
-  before_action :for_admins, except: [:index, :show, :create, :new]
+  before_action :for_admins, except: [:index, :show, :create, :new, :members]
   before_action :for_members, only: [:show, :members]
 
   skip_before_filter :verify_authenticity_token, :only => [
@@ -90,9 +90,14 @@ class CompaniesController < ApplicationController
     end
   end
 
-  #admins
+  #admins (Invites only)
   def admins
     @adminInvite = AdminInvite.new
+
+    respond_to do |format|
+      format.json { render json: @company.admin_invite }
+      format.html { @adminInvite }
+    end
   end
 
   def admins_save
@@ -137,8 +142,14 @@ class CompaniesController < ApplicationController
 
   end
 
+  # Invited users (list all invited only)
   def voters
     @voterInvite = VoterInvite.new
+
+    respond_to do |format|
+      format.json { render json: @company.voter_invite }
+      format.html { @voterInvite }
+    end
   end
 
   def voters_save
@@ -185,6 +196,10 @@ class CompaniesController < ApplicationController
 
   def members
     render json: @company.all_members
+  end
+
+  def members_admins
+    render json: @company.admins
   end
 
   def admin_add

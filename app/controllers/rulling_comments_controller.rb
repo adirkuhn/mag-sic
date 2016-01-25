@@ -7,6 +7,7 @@ class RullingCommentsController < ApplicationController
 
   def index
     @comments = @rulling.rulling_comments
+    return render json: @comments
   end
 
   def show
