@@ -48,7 +48,7 @@ class MootsController < ApplicationController
     respond_to do |format|
       if @moot.save
         format.html { redirect_to [@moot.company, @moot], notice: 'Moot was successfully created.' }
-        format.json { render :show, status: :created, location: @moot }
+        format.json { render :show, status: :created, location: [@moot.company, @moot] }
       else
         format.html { render :new }
         format.json { render json: @moot.errors, status: :unprocessable_entity }
@@ -62,7 +62,7 @@ class MootsController < ApplicationController
     respond_to do |format|
       if @moot.update(moot_params)
         format.html { redirect_to [@moot.company, @moot], notice: 'Moot was successfully updated.' }
-        format.json { render :show, status: :ok, location: @moot }
+        format.json { render :show, status: :ok, location: [@moot.company, @moot] }
       else
         format.html { render :edit }
         format.json { render json: @moot.errors, status: :unprocessable_entity }

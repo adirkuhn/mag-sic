@@ -76,7 +76,16 @@ class ActiveSupport::TestCase
     self.create_user(params)
   end
 
-  def invite_new_member_and_register(params, company_id = 1, total_invites = 1)
+  def invite_new_member_and_register(params = {}, company_id = 1, total_invites = 1)
+    member_data = {
+      :email => params[:email] || "invited_user@gmail.com",
+      :password => params[:password] || "super123",
+      :name => params[:name] || "Ciclano membro",
+      :cpf => params[:cpf] || "01111111211",
+      :securityQuestion1_id => params[:securityQuestion1_id] || 2,
+      :securityAnswer1 => params[:securityAnswer1] || "recupera"
+    }
+    params = member_data
     # Invite
     # POST - http://localhost:3000/companies/1/admins.json
     post "/companies/" + company_id.to_s + "/voters.json", { :voter_invite => { :email => params[:email] } }
@@ -96,5 +105,38 @@ class ActiveSupport::TestCase
     assert_response :success
 
     self.create_user(params)
+  end
+
+  def create_moot(params = {}, assert_value = :created, company_id = 1)
+
+    title = params[:title] || 'Assembleia de Teste'
+    description = params[:description] || 'uma assembleia como qualquer outra'
+    voting_start_at = params[:voting_start_at] || Time.now
+    voting_ending_at = params[:voting_ending_at] || 30.days.from_now
+
+    # http://localhost:3000/companies/1/moots
+    post "/companies/" + company_id.to_s + "/moots.json", {
+      moot: {
+        title: title,
+        description: description,
+        voting_start_at: voting_start_at,
+        voting_ending_at: voting_ending_at
+      }
+    }
+
+    assert_response assert_value
+
+    if assert_value == :created
+      @moot = JSON.parse(body, :symbolize_names => true)
+      @moot = @moot[:moot]
+    end
+  end
+
+  def create_comment(comment, company_id = 1, moot_id = 1)
+    post_via_redirect(
+      "/companies/" + company_id.to_s + "/moots/" + moot_id.to_s + "/moot_comments.json",
+      { :moot_comment => { :comment => comment } }
+    )
+    assert_response :success
   end
 end
