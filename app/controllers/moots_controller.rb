@@ -29,6 +29,11 @@ class MootsController < ApplicationController
   # GET /moots/new
   def new
     @moot = @company.moots.build
+
+    respond_to do |format|
+      format.json { return render json: @moot }
+      format.html {}
+    end
   end
 
   # GET /moots/1/edit
