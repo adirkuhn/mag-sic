@@ -87,7 +87,7 @@ class ActiveSupport::TestCase
     }
     params = member_data
     # Invite
-    # POST - http://localhost:3000/companies/1/admins.json
+    # POST - http://localhost:3000/companies/1/voters.json
     post "/companies/" + company_id.to_s + "/voters.json", { :voter_invite => { :email => params[:email] } }
     assert_response :success
 
@@ -108,7 +108,6 @@ class ActiveSupport::TestCase
   end
 
   def create_moot(params = {}, assert_value = :created, company_id = 1)
-
     title = params[:title] || 'Assembleia de Teste'
     description = params[:description] || 'uma assembleia como qualquer outra'
     voting_start_at = params[:voting_start_at] || Time.now
@@ -138,5 +137,26 @@ class ActiveSupport::TestCase
       { :moot_comment => { :comment => comment } }
     )
     assert_response :success
+  end
+
+  def create_rulling(params = {}, assert_value = :created, company_id = 1, moot_id = 1)
+    title = params[:title] || 'Pauta de teste'
+    objective = params[:objective] || 'objetivo da pauta'
+    description = params[:description] || 'Uma pauta de teste para um objetivo de teste'
+
+    post "/companies/" + company_id.to_s + "/moots/" + moot_id.to_s + "/rullings.json", {
+      rulling: {
+        title: title,
+        objective: objective,
+        description: description
+      }
+    }
+
+    assert_response assert_value
+
+    if assert_value == :created
+      @rulling = JSON.parse(body, :symbolize_names => true)
+      @rulling = @rulling[:rulling]
+    end
   end
 end

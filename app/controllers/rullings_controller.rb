@@ -39,7 +39,7 @@ class RullingsController < ApplicationController
     respond_to do |format|
       if @rulling.save
         format.html { redirect_to [@rulling.moot.company, @rulling.moot], notice: 'Rulling was successfully created.' }
-        format.json { render :show, status: :created, location: @rulling }
+        format.json { render :show, status: :created, location: [@rulling.moot.company, @rulling.moot] }
       else
         format.html { render :new }
         format.json { render json: @rulling.errors, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class RullingsController < ApplicationController
     respond_to do |format|
       if @rulling.update(rulling_params)
         format.html { redirect_to [@rulling.moot.company, @rulling.moot], notice: 'Rulling was successfully updated.' }
-        format.json { render :show, status: :ok, location: @rulling }
+        format.json { render :show, status: :ok, location: [@rulling.moot.company, @rulling.moot] }
       else
         format.html { render :edit }
         format.json { render json: @rulling.errors, status: :unprocessable_entity }
