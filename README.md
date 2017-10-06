@@ -1,2 +1,4 @@
 # mag-sic
-assembleia
+Projeto de votos por assembleia
+--
+abandonado
